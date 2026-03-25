@@ -41,7 +41,7 @@ export default function Home() {
     <>
       {/* NAV */}
       <nav ref={navRef} id="navbar">
-        <a href="#" className="nav-logo"><img src="/logo.png" alt="ARK" height={60} /></a>
+        <a href="#" className="nav-logo"><img src="/logo.png" alt="ARK" height={80} /></a>
         <div className="nav-links">
           <a href="#divisions">Divisions</a>
           <a href="#products">Products</a>
