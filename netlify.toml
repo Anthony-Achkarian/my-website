@@ -1,6 +1,3 @@
 [build]
-  command = "bash build.sh"
+  command = "echo hello && mkdir -p apps/web/.next"
   publish = "apps/web/.next"
-
-[build.environment]
-  NODE_VERSION = "20"
