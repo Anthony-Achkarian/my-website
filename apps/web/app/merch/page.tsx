@@ -4,7 +4,7 @@ import { useState } from "react";
 import { products, Product, getVariant } from "../../lib/products";
 
 function ProductCard({ product }: { product: Product }) {
-  const [size, setSize] = useState(product.sizes?.[1] ?? "");
+  const [size, setSize] = useState(product.sizes?.[1] ?? product.variants?.[0]?.size ?? "");
   const [color, setColor] = useState(product.colors?.[0]?.name ?? "");
   const [loading, setLoading] = useState(false);
 
