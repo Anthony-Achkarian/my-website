@@ -1,7 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-async function createPrintfulOrder(session: Stripe.Checkout.Session) {
+// Stripe v21 types: shipping_details on Checkout.Session
+type CheckoutSession = Stripe.Checkout.Session & {
+  shipping_details?: {
+    name?: string | null;
+    address?: {
+      line1?: string | null;
+      line2?: string | null;
+      city?: string | null;
+      state?: string | null;
+      country?: string | null;
+      postal_code?: string | null;
+    } | null;
+  } | null;
+};
+
+async function createPrintfulOrder(session: CheckoutSession) {
   const shipping = session.shipping_details;
   const variantId = Number(session.metadata?.printfulVariantId);
   const size = session.metadata?.size;
@@ -51,8 +66,6 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   console.log("Printful order created:", data.result?.id);
 }
 
-// Vercel requires the raw body for Stripe webhook signature verification.
-// Disable body parsing by reading the raw text directly from the request.
 export async function POST(request: NextRequest) {
   const rawBody = await request.text();
   const sig = request.headers.get("stripe-signature");
@@ -76,7 +89,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (stripeEvent.type === "checkout.session.completed") {
-    const session = stripeEvent.data.object as Stripe.Checkout.Session;
+    const session = stripeEvent.data.object as CheckoutSession;
     try {
       await createPrintfulOrder(session);
     } catch (err) {
