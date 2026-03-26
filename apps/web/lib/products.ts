@@ -57,7 +57,7 @@ export const products: Product[] = [
     id: "ark-tshirt",
     name: "ARK Organic T-Shirt",
     description: "Unisex organic cotton tee with the ARK Industries logo. Lightweight and sustainably made.",
-    image: "https://files.cdn.printful.com/o/upload/product-catalog-img/e0/e09771b7c272546bbf374f4d2c67c11c_l",
+    image: "https://files.cdn.printful.com/files/068/068cfa26f66bebdea8b4a5be31a59894_preview.png",
     category: "Apparel",
     colors: [
       { name: "Black",        hex: "#1a1a1a" },
@@ -90,7 +90,7 @@ export const products: Product[] = [
     id: "ark-hoodie",
     name: "ARK Organic Hoodie",
     description: "Unisex organic mid-weight hoodie with the ARK Industries logo. Cozy and sustainably made.",
-    image: "https://files.cdn.printful.com/o/upload/product-catalog-img/04/049e8b8b76e5dcd4c5eb60ecb57afe21_l",
+    image: "https://files.cdn.printful.com/files/0e0/0e0198c6f1544af6bb636d233993fc2b_preview.png",
     category: "Apparel",
     colors: [
       { name: "Black",        hex: "#1a1a1a" },
@@ -123,7 +123,7 @@ export const products: Product[] = [
     id: "ark-mug",
     name: "ARK Mug",
     description: "White glossy 11oz mug with the ARK Industries logo. Perfect for your morning coffee.",
-    image: "https://files.cdn.printful.com/o/upload/product-catalog-img/8c/8c4ac4a450b8485bc8a6e041a5a23666_l",
+    image: "https://files.cdn.printful.com/files/b59/b59d5e2b1aae34f42ebd5d4ac2839234_preview.png",
     category: "Accessories",
     printfulVariantId: 5246858594,
     price: 2500,
@@ -132,7 +132,7 @@ export const products: Product[] = [
     id: "ark-water-bottle",
     name: "ARK Water Bottle",
     description: "Stainless steel 17oz water bottle with the ARK Industries logo. Keeps drinks cold or hot.",
-    image: "https://files.cdn.printful.com/o/products/382/product_1614007264.jpg",
+    image: "https://files.cdn.printful.com/files/040/040e0c95e2f54af053a7bf42149c86c5_preview.png",
     category: "Accessories",
     colors: [
       { name: "Black", hex: "#1a1a1a" },
