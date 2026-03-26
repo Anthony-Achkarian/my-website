@@ -228,7 +228,7 @@ export default function Home() {
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
-            <img src="/logo.png" alt="ARK" height={60} />
+            <img src="/logo.png" alt="ARK" height={100} />
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
