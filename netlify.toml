@@ -1,3 +1,10 @@
 [build]
-  command = "echo hello && mkdir -p apps/web/.next"
-  publish = "apps/web/.next"
+  base = "apps/web"
+  command = "npm install --prefix ../.. && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
