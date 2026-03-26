@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { products, Product } from "../../lib/products";
+import { products, Product, getVariant } from "../../lib/products";
 
 function ProductCard({ product }: { product: Product }) {
-  const [size, setSize] = useState(product.sizes?.[1] ?? null);
+  const [size, setSize] = useState(product.sizes?.[1] ?? "");
+  const [color, setColor] = useState(product.colors?.[0]?.name ?? "");
   const [loading, setLoading] = useState(false);
+
+  const variant = product.variants ? getVariant(product, size, color) : null;
+  const price = variant?.price ?? product.price ?? 0;
 
   const handleBuy = async () => {
     setLoading(true);
@@ -13,10 +17,11 @@ function ProductCard({ product }: { product: Product }) {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: product.id, size }),
+        body: JSON.stringify({ productId: product.id, size, color }),
       });
-      const { url } = await res.json();
+      const { url, error } = await res.json();
       if (url) window.location.href = url;
+      else console.error(error);
     } catch (err) {
       console.error(err);
     } finally {
@@ -35,6 +40,22 @@ function ProductCard({ product }: { product: Product }) {
       <div className="merch-card-body">
         <h3>{product.name}</h3>
         <p>{product.description}</p>
+
+        {product.colors && (
+          <div className="merch-colors">
+            {product.colors.map((c) => (
+              <button
+                key={c.name}
+                className={`merch-color-btn${color === c.name ? " active" : ""}`}
+                style={{ background: c.hex }}
+                title={c.name}
+                onClick={() => setColor(c.name)}
+              />
+            ))}
+            <span className="merch-color-label">{color}</span>
+          </div>
+        )}
+
         {product.sizes && (
           <div className="merch-sizes">
             {product.sizes.map((s) => (
@@ -48,8 +69,9 @@ function ProductCard({ product }: { product: Product }) {
             ))}
           </div>
         )}
+
         <div className="merch-card-footer">
-          <span className="merch-price">${(product.price / 100).toFixed(2)}</span>
+          <span className="merch-price">${(price / 100).toFixed(2)}</span>
           <button className="btn-primary merch-buy-btn" onClick={handleBuy} disabled={loading}>
             {loading ? "Loading..." : "Buy Now →"}
           </button>
