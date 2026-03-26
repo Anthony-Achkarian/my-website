@@ -5,7 +5,7 @@ import { products, Product, getVariant } from "../../lib/products";
 
 function ProductCard({ product }: { product: Product }) {
   const [size, setSize] = useState(product.sizes?.[1] ?? product.variants?.[0]?.size ?? "");
-  const [color, setColor] = useState(product.colors?.[0]?.name ?? "");
+  const color = product.variants?.[0]?.color ?? "";
   const [loading, setLoading] = useState(false);
 
   const variant = product.variants ? getVariant(product, size, color) : null;
@@ -40,21 +40,6 @@ function ProductCard({ product }: { product: Product }) {
       <div className="merch-card-body">
         <h3>{product.name}</h3>
         <p>{product.description}</p>
-
-        {product.colors && (
-          <div className="merch-colors">
-            {product.colors.map((c) => (
-              <button
-                key={c.name}
-                className={`merch-color-btn${color === c.name ? " active" : ""}`}
-                style={{ background: c.hex }}
-                title={c.name}
-                onClick={() => setColor(c.name)}
-              />
-            ))}
-            <span className="merch-color-label">{color}</span>
-          </div>
-        )}
 
         {product.sizes && (
           <div className="merch-sizes">
