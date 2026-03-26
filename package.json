@@ -12,6 +12,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.9",
     "turbo": "latest"
   }
 }
