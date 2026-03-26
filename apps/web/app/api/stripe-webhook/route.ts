@@ -20,8 +20,10 @@ async function createPrintfulOrder(session: CheckoutSession) {
   const shipping = session.shipping_details;
   const variantId = Number(session.metadata?.printfulVariantId);
   const size = session.metadata?.size;
+  const isPrintful = session.metadata?.isPrintful !== "false";
 
-  if (!shipping?.address || !variantId) return;
+  // Skip Printful fulfillment for direct products (e.g. ARK Tactical X1)
+  if (!isPrintful || !shipping?.address || !variantId) return;
 
   const body = {
     recipient: {

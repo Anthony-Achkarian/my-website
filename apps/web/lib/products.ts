@@ -17,9 +17,32 @@ export type Product = {
   // For simple products with no size/color options
   printfulVariantId?: number;
   price?: number;
+  specs?: { label: string; value: string }[];
+  badge?: string;
 };
 
 export const products: Product[] = [
+  // ── Tech / Defense ──────────────────────────────────────────────────────────
+  {
+    id: "ark-tactical-x1",
+    name: "ARK Tactical X1",
+    description:
+      "Mission-ready intelligence from the sky. The ARK Tactical X1 is engineered for tactical operations, security deployments, search & rescue, and first-responder support. Powered by ARK's onboard AI, it delivers real-time object tracking, encrypted 4K video, and night-vision compatibility — all in a rapid-deploy airframe built to perform in adverse conditions.",
+    image:
+      "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=900&q=80",
+    category: "Defense",
+    price: 129900, // $1,299.00
+    badge: "New",
+    specs: [
+      { label: "Flight Time",    value: "45 min" },
+      { label: "Range",          value: "10 km" },
+      { label: "Vision",         value: "Thermal / Night Vision" },
+      { label: "Video Feed",     value: "Encrypted 4K" },
+      { label: "Wind Resistance",value: "Up to 35 mph" },
+      { label: "Deploy Time",    value: "< 60 seconds" },
+    ],
+  },
+  // ── Apparel ──────────────────────────────────────────────────────────────────
   {
     id: "ark-sweatshirt",
     name: "ARK Organic Sweatshirt",
@@ -65,6 +88,7 @@ export const products: Product[] = [
       { size: "2XL", color: "French Navy", printfulVariantId: 5246862161, price: 6800 },
     ],
   },
+  // ── Accessories ──────────────────────────────────────────────────────────────
   {
     id: "ark-mug",
     name: "ARK Mug",

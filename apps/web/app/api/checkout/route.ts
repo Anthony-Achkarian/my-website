@@ -1,7 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const products = [
+// Direct (non-Printful) products — fulfilled manually or via third-party logistics.
+// isPrintful: false means the webhook will skip Printful order creation.
+const directProducts = [
+  {
+    id: "ark-tactical-x1",
+    name: "ARK Tactical X1",
+    description:
+      "Mission-ready tactical drone. AI-assisted tracking, encrypted 4K video, thermal/night-vision compatible, 45 min flight time, 10 km range.",
+    image:
+      "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=900&q=80",
+    price: 129900, // $1,299.00 in cents
+    isPrintful: false,
+  },
+];
+
+// Printful-fulfilled products (kept in sync with lib/products.ts)
+const printfulProducts = [
   {
     id: "ark-sweatshirt",
     name: "ARK Organic Sweatshirt",
@@ -68,7 +84,48 @@ export async function POST(request: NextRequest) {
   }
 
   const { productId, size, color } = body;
-  const product = products.find((p) => p.id === productId);
+
+  // ── Check direct (non-Printful) products first ─────────────────────────────
+  const directProduct = directProducts.find((p) => p.id === productId);
+  if (directProduct) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || "https://arkindustriestech.com";
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            unit_amount: directProduct.price,
+            product_data: {
+              name: directProduct.name,
+              description: directProduct.description,
+              images: [directProduct.image],
+            },
+          },
+          quantity: 1,
+        },
+      ],
+      shipping_address_collection: {
+        allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK"],
+      },
+      metadata: {
+        productId: directProduct.id,
+        printfulVariantId: "", // empty → webhook skips Printful fulfillment
+        size: "",
+        color: "",
+        isPrintful: "false",
+      },
+      success_url: `${origin}/merch/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/merch`,
+    });
+
+    return NextResponse.json({ url: session.url });
+  }
+
+  // ── Printful-fulfilled products ────────────────────────────────────────────
+  const product = printfulProducts.find((p) => p.id === productId);
   if (!product) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
@@ -110,6 +167,7 @@ export async function POST(request: NextRequest) {
       printfulVariantId: String(printfulVariantId),
       size: size || "",
       color: color || "",
+      isPrintful: "true",
     },
     success_url: `${origin}/merch/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/merch`,
