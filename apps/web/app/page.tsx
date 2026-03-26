@@ -46,6 +46,7 @@ export default function Home() {
           <a href="#divisions">Divisions</a>
           <a href="#products">Products</a>
           <a href="#about">About</a>
+          <a href="/merch">Merch</a>
           <a href="#contact" className="nav-cta">Get in Touch</a>
         </div>
         <button
