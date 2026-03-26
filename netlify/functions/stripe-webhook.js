@@ -1,11 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
+const Stripe = require("stripe");
 
-const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-async function createPrintfulOrder(session: Stripe.Checkout.Session) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const shipping = (session as any).shipping_details as { name?: string; address?: { line1?: string; line2?: string; city?: string; state?: string; country?: string; postal_code?: string } } | null;
+async function createPrintfulOrder(session) {
+  const shipping = session.shipping_details;
   const variantId = Number(session.metadata?.printfulVariantId);
   const size = session.metadata?.size;
 
@@ -15,12 +11,12 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
     recipient: {
       name: shipping.name,
       address1: shipping.address.line1,
-      address2: shipping.address.line2 ?? "",
+      address2: shipping.address.line2 || "",
       city: shipping.address.city,
       state_code: shipping.address.state,
       country_code: shipping.address.country,
       zip: shipping.address.postal_code,
-      email: session.customer_details?.email ?? "",
+      email: session.customer_details?.email || "",
     },
     items: [
       {
@@ -30,7 +26,7 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
       },
     ],
     retail_costs: {
-      subtotal: (session.amount_total! / 100).toFixed(2),
+      subtotal: (session.amount_total / 100).toFixed(2),
       currency: "USD",
     },
   };
@@ -54,28 +50,39 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   console.log("Printful order created:", data.result?.id);
 }
 
-export async function POST(req: NextRequest) {
-  const body = await req.text();
-  const sig = req.headers.get("stripe-signature")!;
-
-  const stripe = getStripe();
-  let event: Stripe.Event;
-  try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
-  } catch (err) {
-    console.error("Webhook signature verification failed:", err);
-    return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
+  const sig = event.headers["stripe-signature"];
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+  let stripeEvent;
+  try {
+    stripeEvent = stripe.webhooks.constructEvent(
+      event.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    console.error("Webhook signature verification failed:", err);
+    return { statusCode: 400, body: JSON.stringify({ error: "Invalid signature" }) };
+  }
+
+  if (stripeEvent.type === "checkout.session.completed") {
+    const session = stripeEvent.data.object;
     try {
       await createPrintfulOrder(session);
     } catch (err) {
       console.error("Failed to create Printful order:", err);
-      return NextResponse.json({ error: "Order creation failed" }, { status: 500 });
+      return { statusCode: 500, body: JSON.stringify({ error: "Order creation failed" }) };
     }
   }
 
-  return NextResponse.json({ received: true });
-}
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ received: true }),
+  };
+};

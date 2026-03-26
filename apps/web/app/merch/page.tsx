@@ -14,7 +14,7 @@ function ProductCard({ product }: { product: Product }) {
   const handleBuy = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/checkout", {
+      const res = await fetch("/.netlify/functions/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId: product.id, size, color }),

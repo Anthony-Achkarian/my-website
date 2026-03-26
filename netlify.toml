@@ -1,10 +1,9 @@
 [build]
-  command = "npm install && cd apps/web && npx next build"
-  publish = "apps/web/.next"
+  command = "npm install && npm run build --workspace=apps/web"
+  publish = "apps/web/out"
 
 [build.environment]
   NODE_VERSION = "20"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[functions]
+  directory = "netlify/functions"
