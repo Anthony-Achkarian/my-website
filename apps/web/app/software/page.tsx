@@ -77,7 +77,7 @@ export default function SoftwarePage() {
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
+        <a href="/" className="sub-nav-logo"></a>
         <div className="sub-nav-links">
           
           <a href="/robotics">Robotics</a>
@@ -349,7 +349,6 @@ export default function SoftwarePage() {
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
-            <img src="/logo.png" alt="ARK" />
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
