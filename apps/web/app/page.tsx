@@ -55,7 +55,6 @@ export default function Home() {
       <nav ref={navRef} id="navbar">
         <a href="#" className="nav-logo"><img src="/logo.png" alt="ARK" height={80} /></a>
         <div className="nav-links">
-          <a href="#divisions">Divisions</a>
           <div className="nav-dropdown-wrap">
             <span className="nav-dropdown-trigger">
               Products
@@ -82,6 +81,10 @@ export default function Home() {
                 <span>Housing</span>
                 <span className="nav-badge-soon">Soon</span>
               </a>
+              <a href="/software" className="nav-dropdown-item">
+                <span>ARK Studio</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
             </div>
           </div>
           <a href="#about">About</a>
@@ -106,45 +109,11 @@ export default function Home() {
           <h1>Intelligence.<br /><span className="gradient-text">Engineered.</span></h1>
           <p>Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development — shaping the infrastructure of tomorrow.</p>
           <div className="hero-buttons">
-            <a href="#divisions" className="btn-primary">
+            <a href="#products" className="btn-primary">
               Explore Our Work
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a href="#contact" className="btn-secondary">Contact Us</a>
-          </div>
-        </div>
-      </section>
-
-      {/* DIVISIONS */}
-      <section id="divisions">
-        <div className="container">
-          <div className="fade-up">
-            <div className="section-label">What We Do</div>
-            <div className="section-title">Three Divisions.<br />One Mission.</div>
-            <p className="section-sub">We build across domains, combining deep expertise in AI, robotics, and real estate to create integrated, intelligent systems.</p>
-          </div>
-          <div className="divisions-grid">
-            <div className="division-card fade-up">
-              <div className="division-icon icon-ai">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" /><path d="M16 14a4 4 0 0 1 0 8H8a4 4 0 0 1 0-8" /><line x1="12" y1="8" x2="12" y2="14" /></svg>
-              </div>
-              <h3>Artificial Intelligence</h3>
-              <p>Our flagship AI platform, Ask Ark, delivers intelligent answers and automation. We develop proprietary models purpose-built for enterprise decision-making and personal productivity.</p>
-            </div>
-            <div className="division-card fade-up">
-              <div className="division-icon icon-robotics">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M12 2v4" /><circle cx="12" cy="12" r="2" /><path d="M2 12h4" /><path d="M18 12h4" /></svg>
-              </div>
-              <h3>Robotics</h3>
-              <p>From autonomous drones to intelligent machines, our robotics division designs, prototypes, and builds next-generation hardware powered by our AI stack.</p>
-            </div>
-            <div className="division-card fade-up">
-              <div className="division-icon icon-realestate">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18" /><path d="M5 21V7l7-4 7 4v14" /><path d="M9 21v-6h6v6" /></svg>
-              </div>
-              <h3>Real Estate</h3>
-              <p>Smart development meets intelligent design. We create tech-forward properties and spaces that integrate automation, sustainability, and data-driven management.</p>
-            </div>
           </div>
         </div>
       </section>
@@ -356,7 +325,6 @@ export default function Home() {
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
-            <a href="#divisions">Divisions</a>
             <a href="/robotics">Robotics</a>
             <a href="/quantum">Quantum</a>
             <a href="/data-centers">Data Centers</a>
