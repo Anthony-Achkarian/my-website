@@ -46,12 +46,12 @@ export default function RoboticsPage() {
         <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
           
+          <a href="/software">ARK Studio</a>
           <a href="/robotics" className="active">Robotics</a>
           <a href="/quantum" className="hide-md">Quantum</a>
           <a href="/data-centers" className="hide-md">Data Centers</a>
           <a href="/health" className="hide-md">Health</a>
           <a href="/housing" className="hide-md">Housing</a>
-          <a href="/software">ARK Studio</a>
           <a href="/#contact" className="nav-cta">Get in Touch</a>
         </div>
       </nav>
