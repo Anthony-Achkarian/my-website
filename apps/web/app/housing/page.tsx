@@ -31,10 +31,10 @@ export default function HousingPage() {
         <div className="sub-nav-links">
           <a href="/">Home</a>
           <a href="/robotics">Robotics</a>
-          <a href="/quantum">Quantum</a>
-          <a href="/data-centers">Data Centers</a>
-          <a href="/health">Health</a>
-          <a href="/housing">Housing</a>
+          <a href="/quantum" className="hide-md">Quantum</a>
+          <a href="/data-centers" className="hide-md">Data Centers</a>
+          <a href="/health" className="hide-md">Health</a>
+          <a href="/housing" className="hide-md">Housing</a>
           <a href="/careers">Careers</a>
           <a href="/#contact" className="nav-cta">Get in Touch</a>
         </div>
@@ -123,8 +123,8 @@ export default function HousingPage() {
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
-            <a href="/">Home</a><a href="/robotics">Robotics</a><a href="/quantum">Quantum</a>
-            <a href="/data-centers">Data Centers</a><a href="/health">Health</a><a href="/housing">Housing</a>
+            <a href="/">Home</a><a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
+            <a href="/data-centers" className="hide-md">Data Centers</a><a href="/health" className="hide-md">Health</a><a href="/housing" className="hide-md">Housing</a>
             <a href="/careers">Careers</a><a href="/#contact">Contact</a>
           </div>
         </div>
