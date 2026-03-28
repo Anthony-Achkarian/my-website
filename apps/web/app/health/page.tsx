@@ -27,7 +27,7 @@ export default function HealthPage() {
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} /></a>
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
           <a href="/">Home</a>
           <a href="/robotics">Robotics</a>
@@ -119,7 +119,7 @@ export default function HealthPage() {
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
-            <img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} />
+            <img src="/logo.png" alt="ARK" />
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">

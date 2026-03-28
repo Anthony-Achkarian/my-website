@@ -677,6 +677,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; }
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .sub-nav-logo { display: flex; align-items: center; text-decoration: none; }
+.sub-nav-logo img { height: 70px; width: auto; mix-blend-mode: screen; }
 .sub-nav-links { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
 .sub-nav-links a {
   color: var(--gray-400); text-decoration: none;

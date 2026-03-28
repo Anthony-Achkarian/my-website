@@ -43,7 +43,7 @@ export default function RoboticsPage() {
 
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} /></a>
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
           <a href="/">Home</a>
           <a href="/robotics" className="active">Robotics</a>
