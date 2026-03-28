@@ -27,7 +27,7 @@ export default function HousingPage() {
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"></a>
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
           
           <a href="/robotics">Robotics</a>
