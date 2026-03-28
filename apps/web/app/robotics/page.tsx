@@ -45,7 +45,7 @@ export default function RoboticsPage() {
       <nav className="sub-nav">
         <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
-          <a href="/">Home</a>
+          
           <a href="/robotics" className="active">Robotics</a>
           <a href="/quantum" className="hide-md">Quantum</a>
           <a href="/data-centers" className="hide-md">Data Centers</a>

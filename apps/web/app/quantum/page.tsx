@@ -29,7 +29,7 @@ export default function QuantumPage() {
       <nav className="sub-nav">
         <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
         <div className="sub-nav-links">
-          <a href="/">Home</a>
+          
           <a href="/robotics">Robotics</a>
           <a href="/quantum" className="active">Quantum</a>
           <a href="/data-centers" className="hide-md">Data Centers</a>
@@ -132,7 +132,7 @@ export default function QuantumPage() {
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
-            <a href="/">Home</a><a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
+            <a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
             <a href="/data-centers" className="hide-md">Data Centers</a><a href="/health" className="hide-md">Health</a><a href="/housing" className="hide-md">Housing</a>
             <a href="/#contact">Contact</a>
           </div>
