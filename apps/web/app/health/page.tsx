@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const ArkLogo = () => (
-  <svg viewBox="0 0 315 85" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: 36, width: "auto" }}>
-    <line x1="5" y1="13" x2="200" y2="7" stroke="white" strokeWidth="3.2" strokeLinecap="round" />
-    <path d="M 195,7 L 243,3 L 283,83 L 229,30 Z" fill="white" />
-    <text x="5" y="70" fontFamily="'Barlow Condensed', 'Arial Black', sans-serif" fontWeight="800" fontSize="64" fill="white" fontStyle="italic">ARK</text>
-  </svg>
-);
+
 
 export default function HealthPage() {
   const [email, setEmail] = useState("");
@@ -33,7 +27,7 @@ export default function HealthPage() {
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><ArkLogo /></a>
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} /></a>
         <div className="sub-nav-links">
           <a href="/">Home</a>
           <a href="/robotics">Robotics</a>
@@ -125,7 +119,7 @@ export default function HealthPage() {
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
-            <ArkLogo />
+            <img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} />
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">

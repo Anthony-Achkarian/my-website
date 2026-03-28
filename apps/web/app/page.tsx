@@ -61,6 +61,10 @@ export default function Home() {
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </span>
             <div className="nav-dropdown">
+              <a href="/software" className="nav-dropdown-item">
+                <span>ARK Studio</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
               <a href="/robotics" className="nav-dropdown-item">
                 <span>Robotics</span>
                 <span className="nav-badge-live">Live</span>
@@ -79,10 +83,6 @@ export default function Home() {
               </a>
               <a href="/housing" className="nav-dropdown-item">
                 <span>Housing</span>
-                <span className="nav-badge-soon">Soon</span>
-              </a>
-              <a href="/software" className="nav-dropdown-item">
-                <span>ARK Studio</span>
                 <span className="nav-badge-soon">Soon</span>
               </a>
             </div>

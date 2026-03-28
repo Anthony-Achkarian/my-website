@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const ArkLogo = () => (
-  <svg viewBox="0 0 315 85" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: 36, width: "auto" }}>
-    <line x1="5" y1="13" x2="200" y2="7" stroke="white" strokeWidth="3.2" strokeLinecap="round" />
-    <path d="M 195,7 L 243,3 L 283,83 L 229,30 Z" fill="white" />
-    <text x="5" y="70" fontFamily="'Barlow Condensed', 'Arial Black', sans-serif" fontWeight="800" fontSize="64" fill="white" fontStyle="italic">ARK</text>
-  </svg>
-);
+
 
 export default function SoftwarePage() {
   const [email, setEmail] = useState("");
@@ -83,7 +77,7 @@ export default function SoftwarePage() {
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
       <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><ArkLogo /></a>
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} /></a>
         <div className="sub-nav-links">
           <a href="/">Home</a>
           <a href="/robotics">Robotics</a>
@@ -134,6 +128,41 @@ export default function SoftwarePage() {
             )}
           </div>
           <p className="studio-hero-meta">macOS 14+ &middot; Apple Silicon &middot; Free during beta</p>
+        </div>
+      </section>
+
+      {/* FORGE AI DOWNLOAD */}
+      <section style={{ padding: "4rem 2rem 3rem", background: "linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(99,102,241,0.08) 100%)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="container" style={{ maxWidth: 780, margin: "0 auto" }}>
+          <div className="fade-up" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "2.5rem 3rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {/* Badge */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", background: "rgba(59,130,246,0.15)", border: "1px solid rgba(59,130,246,0.3)", borderRadius: 6, padding: "0.25rem 0.65rem" }}>
+                Early Access — Alpha
+              </span>
+            </div>
+            {/* App name + tagline */}
+            <div>
+              <h2 style={{ fontSize: "2rem", fontWeight: 800, margin: "0 0 0.5rem", color: "white", letterSpacing: "-0.02em" }}>Forge AI</h2>
+              <p style={{ color: "var(--gray-400)", fontSize: "1.05rem", lineHeight: 1.6, margin: 0 }}>
+                AI-Powered CAD + Robotics Simulation — describe your design, simulate physics, ship faster.
+              </p>
+            </div>
+            {/* Buttons */}
+            <div style={{ display: "flex", gap: "0.85rem", flexWrap: "wrap", alignItems: "center" }}>
+              <button disabled style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1.4rem", borderRadius: 10, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)", fontSize: "0.95rem", fontWeight: 600, cursor: "not-allowed", position: "relative" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download for Mac
+                <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 4, padding: "0.15rem 0.45rem", color: "rgba(255,255,255,0.4)" }}>Coming Soon</span>
+              </button>
+              <a href="#early-access" style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1.4rem", borderRadius: 10, background: "var(--accent)", color: "white", fontSize: "0.95rem", fontWeight: 600, textDecoration: "none", transition: "opacity 0.2s" }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}>
+                Join Early Access
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -292,7 +321,7 @@ export default function SoftwarePage() {
       </section>
 
       {/* BOTTOM CTA */}
-      <section style={{ padding: "8rem 2rem", textAlign: "center" }}>
+      <section id="early-access" style={{ padding: "8rem 2rem", textAlign: "center" }}>
         <div className="fade-up" style={{ maxWidth: 660, margin: "0 auto" }}>
           <div className="section-label">Early Access</div>
           <h2 className="section-title">The future of engineering<br />runs on your MacBook.</h2>
@@ -321,7 +350,7 @@ export default function SoftwarePage() {
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
-            <ArkLogo />
+            <img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} />
             <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
           </div>
           <div className="footer-links">
