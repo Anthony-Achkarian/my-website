@@ -41,6 +41,22 @@ export default function RoboticsPage() {
   return (
     <main className="robotics-page">
 
+      {/* NAV */}
+      <nav className="sub-nav">
+        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" style={{ height: 36, width: "auto" }} /></a>
+        <div className="sub-nav-links">
+          <a href="/">Home</a>
+          <a href="/robotics" className="active">Robotics</a>
+          <a href="/quantum">Quantum</a>
+          <a href="/data-centers">Data Centers</a>
+          <a href="/health">Health</a>
+          <a href="/housing">Housing</a>
+          <a href="/software">ARK Studio</a>
+          <a href="/careers">Careers</a>
+          <a href="/#contact" className="nav-cta">Get in Touch</a>
+        </div>
+      </nav>
+
       {/* ── Hero ── */}
       <section className="robotics-hero" ref={heroRef}>
         <div className="robotics-hero-grid" />
