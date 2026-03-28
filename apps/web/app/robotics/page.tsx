@@ -52,7 +52,6 @@ export default function RoboticsPage() {
           <a href="/health" className="hide-md">Health</a>
           <a href="/housing" className="hide-md">Housing</a>
           <a href="/software">ARK Studio</a>
-          <a href="/careers">Careers</a>
           <a href="/#contact" className="nav-cta">Get in Touch</a>
         </div>
       </nav>

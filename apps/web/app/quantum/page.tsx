@@ -35,7 +35,6 @@ export default function QuantumPage() {
           <a href="/data-centers" className="hide-md">Data Centers</a>
           <a href="/health" className="hide-md">Health</a>
           <a href="/housing" className="hide-md">Housing</a>
-          <a href="/careers">Careers</a>
           <a href="/#contact" className="nav-cta">Get in Touch</a>
         </div>
       </nav>
@@ -135,7 +134,7 @@ export default function QuantumPage() {
           <div className="footer-links">
             <a href="/">Home</a><a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
             <a href="/data-centers" className="hide-md">Data Centers</a><a href="/health" className="hide-md">Health</a><a href="/housing" className="hide-md">Housing</a>
-            <a href="/careers">Careers</a><a href="/#contact">Contact</a>
+            <a href="/#contact">Contact</a>
           </div>
         </div>
       </footer>
