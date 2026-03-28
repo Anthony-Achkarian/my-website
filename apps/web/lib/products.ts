@@ -30,7 +30,7 @@ export const products: Product[] = [
       "Mission-ready intelligence from the sky. The ARK Tactical X1 is engineered for tactical operations, security deployments, search & rescue, and first-responder support. Powered by ARK's onboard AI, it delivers real-time object tracking, encrypted 4K video, and night-vision compatibility — all in a rapid-deploy airframe built to perform in adverse conditions.",
     image:
       "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=900&q=80",
-    category: "Defense",
+    category: "Robotics",
     price: 129900, // $1,299.00
     badge: "New",
     specs: [

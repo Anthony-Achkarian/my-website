@@ -72,6 +72,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#divisions">Divisions</a>
           <a href="#products">Products</a>
+          <a href="/robotics">Robotics</a>
           <a href="#about">About</a>
           <a href="/merch">Merch</a>
           <a href="#contact" className="nav-cta">Get in Touch</a>
