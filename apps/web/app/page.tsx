@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ArkLogo = ({ height = 36, color = "white" }: { height?: number; color?: string }) => (
   <svg viewBox="0 0 315 85" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height, width: "auto" }}>
@@ -19,6 +19,33 @@ const ArkLogo = ({ height = 36, color = "white" }: { height?: number; color?: st
 
 export default function Home() {
   const navRef = useRef<HTMLElement>(null);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        const data = await res.json();
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -212,16 +239,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CONTACT */}
       <section className="cta-section" id="contact">
         <div className="cta-content fade-up">
           <div className="section-label">Get Started</div>
           <h2>Ready to Build<br />the Future Together?</h2>
           <p>Whether you&apos;re interested in our AI products, robotics partnerships, or real estate ventures — let&apos;s talk.</p>
-          <a href="mailto:anthonyachkarian@gmail.com" className="btn-primary">
-            Contact Ark Industries
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </a>
+
+          {status === "success" ? (
+            <div className="contact-success">
+              <div className="contact-success-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <h3>Message Sent!</h3>
+              <p>Thanks for reaching out. We&apos;ll get back to you as soon as possible.</p>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              {status === "error" && (
+                <div className="contact-error">{errorMsg}</div>
+              )}
+              <div className="contact-form-row">
+                <div className="contact-field">
+                  <label htmlFor="contact-name">Name</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    placeholder="Your name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="contact-email">Email</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    placeholder="your@email.com"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="contact-field">
+                <label htmlFor="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  placeholder="Tell us about your project or inquiry…"
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn-primary contact-submit"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? (
+                  "Sending…"
+                ) : (
+                  <>
+                    Send Message
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </>
+                )}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
