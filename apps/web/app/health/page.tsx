@@ -33,8 +33,9 @@ export default function HealthPage() {
           <a href="/robotics">Robotics</a>
           <a href="/quantum" className="hide-md">Quantum</a>
           <a href="/data-centers" className="hide-md">Data Centers</a>
-          <a href="/health" className="hide-md">Health</a>
+          <a href="/health" className="active">Health</a>
           <a href="/housing" className="hide-md">Housing</a>
+          <a href="/software">ARK Studio</a>
           <a href="/#contact" className="nav-cta">Get in Touch</a>
         </div>
       </nav>
