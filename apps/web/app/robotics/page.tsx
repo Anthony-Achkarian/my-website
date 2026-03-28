@@ -220,6 +220,65 @@ export default function RoboticsPage() {
         </div>
       </section>
 
+
+      {/* ── ARK Humanoid Robot (Coming Soon) ── */}
+      <section className="robotics-humanoid">
+        <div className="container">
+          <div className="humanoid-header fade-up" style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <div className="section-label">Next Generation</div>
+            <div className="section-title">The Future of<br /><span className="gradient-text">Physical AI.</span></div>
+          </div>
+          <div className="humanoid-grid fade-up">
+            {/* Left: Coming Soon image */}
+            <div className="humanoid-image-wrap">
+              <div className="humanoid-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80"
+                  alt="ARK Humanoid Robot"
+                  className="humanoid-img"
+                />
+                <div className="humanoid-overlay" />
+                <div className="humanoid-coming-soon">
+                  <span className="humanoid-cs-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    Coming Soon
+                  </span>
+                  <p>In Development</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Info */}
+            <div className="humanoid-info">
+              <div className="section-label">ARK Humanoid</div>
+              <h2 className="humanoid-title">General-Purpose<br />Intelligence. Embodied.</h2>
+              <p className="humanoid-desc">
+                The ARK Humanoid is designed to operate autonomously in unstructured environments — from warehouses and construction sites to disaster zones and elder care. Built on the same AI stack powering the X1 drone, it brings ARK intelligence into physical form.
+              </p>
+              <ul className="product-features">
+                <li>5-DOF per arm with dexterous manipulation</li>
+                <li>Full bipedal locomotion over rough terrain</li>
+                <li>Onboard ARK AI for real-time decision-making</li>
+                <li>240° perception array — cameras, LiDAR, tactile</li>
+                <li>Designed for human-safe collaboration</li>
+              </ul>
+              <div className="humanoid-cta">
+                <span className="humanoid-price-label">Contact for Pricing</span>
+                <a
+                  href="mailto:anthonyachkarian@gmail.com?subject=ARK Humanoid Robot — Enterprise Inquiry"
+                  className="btn-secondary"
+                >
+                  Request Info
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Use Cases ── */}
       <section className="robotics-usecases">
         <div className="container">
@@ -674,6 +733,78 @@ export default function RoboticsPage() {
           .detail-buy-btn { width: 100%; justify-content: center; }
           .pill-bottom-right { display: none; }
         }
+
+        /* ── Humanoid Robot Section ── */
+        .robotics-humanoid {
+          padding: 7rem 2rem;
+          background: var(--navy-light);
+          border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .humanoid-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 5rem;
+          align-items: center;
+        }
+        .humanoid-frame {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.07);
+          aspect-ratio: 4/3;
+          box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+        }
+        .humanoid-img {
+          width: 100%; height: 100%;
+          object-fit: cover;
+          display: block;
+          filter: grayscale(75%) brightness(0.45);
+        }
+        .humanoid-overlay {
+          position: absolute; inset: 0;
+          background: linear-gradient(to bottom, rgba(10,22,40,0.1) 40%, rgba(10,22,40,0.6) 100%);
+        }
+        .humanoid-coming-soon {
+          position: absolute; inset: 0;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center;
+          gap: 0.75rem;
+        }
+        .humanoid-cs-badge {
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          padding: 0.65rem 1.5rem; border-radius: 100px;
+          border: 1px solid rgba(255,255,255,0.22);
+          background: rgba(10,22,40,0.82);
+          backdrop-filter: blur(10px);
+          font-size: 0.85rem; font-weight: 700;
+          color: var(--white); letter-spacing: 0.08em;
+          text-transform: uppercase;
+          box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .humanoid-coming-soon p {
+          font-size: 0.82rem; color: var(--gray-400); font-weight: 500;
+        }
+        .humanoid-title {
+          font-size: clamp(2rem, 3.5vw, 3.25rem);
+          font-weight: 800; letter-spacing: -0.025em; line-height: 1.1;
+          margin: 1rem 0 1.25rem;
+        }
+        .humanoid-desc {
+          color: var(--gray-400); line-height: 1.75; font-size: 1rem;
+          margin-bottom: 1.5rem;
+        }
+        .humanoid-cta {
+          display: flex; align-items: center; gap: 1.75rem;
+          flex-wrap: wrap; margin-top: 1.75rem;
+        }
+        .humanoid-price-label {
+          font-size: 1.05rem; font-weight: 600;
+          color: var(--gray-400); font-style: italic;
+        }
+        @media (max-width: 1024px) {
+          .humanoid-grid { grid-template-columns: 1fr; gap: 3rem; }
+        }
+
       `}</style>
     </main>
   );

@@ -12,7 +12,9 @@
     "lint": "turbo run lint"
   },
   "dependencies": {
-    "stripe": "^21.0.0"
+    "@tailwindcss/postcss": "^4.2.2",
+    "stripe": "^21.0.0",
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "turbo": "latest"

@@ -2,21 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const ArkLogo = ({ height = 36, color = "white" }: { height?: number; color?: string }) => (
-  <svg viewBox="0 0 315 85" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height, width: "auto" }}>
-    <line x1="5" y1="13" x2="200" y2="7" stroke={color} strokeWidth="3.2" strokeLinecap="round" />
-    <path d="M 195,7 L 243,3 L 283,83 L 229,30 Z" fill={color} />
-    <text
-      x="5" y="70"
-      fontFamily="'Barlow Condensed', 'Arial Black', sans-serif"
-      fontWeight="800"
-      fontSize="64"
-      fill={color}
-      fontStyle="italic"
-    >ARK</text>
-  </svg>
-);
-
 export default function Home() {
   const navRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -71,9 +56,36 @@ export default function Home() {
         <a href="#" className="nav-logo"><img src="/logo.png" alt="ARK" height={80} /></a>
         <div className="nav-links">
           <a href="#divisions">Divisions</a>
-          <a href="#products">Products</a>
-          <a href="/robotics">Robotics</a>
+          <div className="nav-dropdown-wrap">
+            <span className="nav-dropdown-trigger">
+              Products
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
+            <div className="nav-dropdown">
+              <a href="/robotics" className="nav-dropdown-item">
+                <span>Robotics</span>
+                <span className="nav-badge-live">Live</span>
+              </a>
+              <a href="/quantum" className="nav-dropdown-item">
+                <span>Quantum Computers</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
+              <a href="/data-centers" className="nav-dropdown-item">
+                <span>Data Centers</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
+              <a href="/health" className="nav-dropdown-item">
+                <span>Health</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
+              <a href="/housing" className="nav-dropdown-item">
+                <span>Housing</span>
+                <span className="nav-badge-soon">Soon</span>
+              </a>
+            </div>
+          </div>
           <a href="#about">About</a>
+          <a href="/careers">Careers</a>
           <a href="/merch">Merch</a>
           <a href="#contact" className="nav-cta">Get in Touch</a>
         </div>
@@ -90,7 +102,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grid" />
         <div className="hero-content fade-up">
-<div className="hero-badge">Building the Future</div>
+          <div className="hero-badge">Building the Future</div>
           <h1>Intelligence.<br /><span className="gradient-text">Engineered.</span></h1>
           <p>Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development — shaping the infrastructure of tomorrow.</p>
           <div className="hero-buttons">
@@ -212,7 +224,7 @@ export default function Home() {
           </div>
 
           <div className="stats fade-up">
-            <div className="stat"><div className="stat-value">3</div><div className="stat-label">Core Divisions</div></div>
+            <div className="stat"><div className="stat-value">5</div><div className="stat-label">Product Divisions</div></div>
             <div className="stat"><div className="stat-value">AI</div><div className="stat-label">First Approach</div></div>
             <div className="stat"><div className="stat-value">24/7</div><div className="stat-label">Autonomous Ops</div></div>
             <div className="stat"><div className="stat-value">∞</div><div className="stat-label">Possibilities</div></div>
@@ -235,6 +247,58 @@ export default function Home() {
               <div className="value-item"><h4>Precision</h4><p>Every detail matters, from code to concrete.</p></div>
               <div className="value-item"><h4>Integration</h4><p>AI, hardware, and spaces working as one.</p></div>
               <div className="value-item"><h4>Impact</h4><p>Building things that matter for the real world.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CAREERS */}
+      <section id="careers" className="careers-section">
+        <div className="container">
+          <div className="fade-up" style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <div className="section-label">Join the Team</div>
+            <div className="section-title">Build What&apos;s Next<br /><span className="gradient-text">With Us.</span></div>
+            <p className="section-sub" style={{ margin: "0 auto" }}>
+              We&apos;re assembling a team of builders, thinkers, and doers obsessed with bringing transformative technology to life. If you want to work on problems that matter, you&apos;re in the right place.
+            </p>
+            <a href="/careers" className="btn-primary" style={{ marginTop: "2rem", display: "inline-flex" }}>
+              View All Openings
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </a>
+          </div>
+          <div className="careers-grid fade-up">
+            <div className="career-card">
+              <div className="career-card-top">
+                <div className="career-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M12 2v4" /><circle cx="12" cy="12" r="2" /><path d="M2 12h4M18 12h4" /></svg>
+                </div>
+                <div className="career-meta"><span className="career-dept">Robotics</span><span className="career-type">Full-time</span></div>
+              </div>
+              <h3>Robotics Engineer</h3>
+              <p>Design and build next-generation autonomous systems. You&apos;ll work on hardware-software integration, motion planning, and real-world deployment of ARK&apos;s robotic platforms.</p>
+              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
+            </div>
+            <div className="career-card">
+              <div className="career-card-top">
+                <div className="career-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" /><path d="M16 14a4 4 0 0 1 0 8H8a4 4 0 0 1 0-8" /><line x1="12" y1="8" x2="12" y2="14" /></svg>
+                </div>
+                <div className="career-meta"><span className="career-dept">AI / ML</span><span className="career-type">Full-time</span></div>
+              </div>
+              <h3>AI/ML Engineer</h3>
+              <p>Develop and optimize the intelligence layer powering ARK&apos;s products — from onboard drone AI to large-scale inference infrastructure and our proprietary language models.</p>
+              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
+            </div>
+            <div className="career-card">
+              <div className="career-card-top">
+                <div className="career-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+                </div>
+                <div className="career-meta"><span className="career-dept">Engineering</span><span className="career-type">Full-time</span></div>
+              </div>
+              <h3>Full Stack Developer</h3>
+              <p>Build the software platforms, dashboards, and APIs that bring ARK&apos;s hardware and AI products to life. You&apos;ll own end-to-end features across web, mobile, and embedded systems.</p>
+              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
             </div>
           </div>
         </div>
@@ -265,52 +329,19 @@ export default function Home() {
               <div className="contact-form-row">
                 <div className="contact-field">
                   <label htmlFor="contact-name">Name</label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    placeholder="Your name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
+                  <input id="contact-name" type="text" placeholder="Your name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                 </div>
                 <div className="contact-field">
                   <label htmlFor="contact-email">Email</label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
+                  <input id="contact-email" type="email" placeholder="your@email.com" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
                 </div>
               </div>
               <div className="contact-field">
                 <label htmlFor="contact-message">Message</label>
-                <textarea
-                  id="contact-message"
-                  placeholder="Tell us about your project or inquiry…"
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                />
+                <textarea id="contact-message" placeholder="Tell us about your project or inquiry…" required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
               </div>
-              <button
-                type="submit"
-                className="btn-primary contact-submit"
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? (
-                  "Sending…"
-                ) : (
-                  <>
-                    Send Message
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </>
-                )}
+              <button type="submit" className="btn-primary contact-submit" disabled={status === "loading"}>
+                {status === "loading" ? "Sending…" : (<>Send Message <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></>)}
               </button>
             </form>
           )}
@@ -326,7 +357,12 @@ export default function Home() {
           </div>
           <div className="footer-links">
             <a href="#divisions">Divisions</a>
-            <a href="#products">Products</a>
+            <a href="/robotics">Robotics</a>
+            <a href="/quantum">Quantum</a>
+            <a href="/data-centers">Data Centers</a>
+            <a href="/health">Health</a>
+            <a href="/housing">Housing</a>
+            <a href="/careers">Careers</a>
             <a href="#about">About</a>
             <a href="mailto:anthonyachkarian@gmail.com">Contact</a>
           </div>
