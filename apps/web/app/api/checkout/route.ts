@@ -174,6 +174,7 @@ export async function POST(request: NextRequest) {
     shipping_address_collection: {
       allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK"],
     },
+    phone_number_collection: { enabled: true },
     metadata: {
       productId: product.id,
       printfulVariantId: String(printfulVariantId),

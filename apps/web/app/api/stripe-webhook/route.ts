@@ -26,6 +26,9 @@ async function createPrintfulOrder(session: CheckoutSession) {
   if (!isPrintful || !shipping?.address || !variantId) return;
 
   const body = {
+    // Idempotency: if Stripe retries the webhook, Printful will return the
+    // existing order rather than creating a duplicate.
+    external_id: session.id,
     recipient: {
       name: shipping.name,
       address1: shipping.address.line1,
@@ -35,6 +38,7 @@ async function createPrintfulOrder(session: CheckoutSession) {
       country_code: shipping.address.country,
       zip: shipping.address.postal_code,
       email: session.customer_details?.email || "",
+      phone: session.customer_details?.phone || "",
     },
     items: [
       {
@@ -49,7 +53,9 @@ async function createPrintfulOrder(session: CheckoutSession) {
     },
   };
 
-  const res = await fetch("https://api.printful.com/orders", {
+  // confirm=true tells Printful to submit the order to fulfillment immediately
+  // (instead of leaving it as a draft). This is required for live mode.
+  const res = await fetch("https://api.printful.com/orders?confirm=true", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
