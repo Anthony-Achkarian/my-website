@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { products } from "../../lib/products";
 
 const drone = products.find((p) => p.id === "ark-tactical-x1")!;
 
 export default function RoboticsPage() {
-  const [loading, setLoading] = useState(false);
+  // NOTE: The ARK Tactical X1 is currently inquiry-only and not available for
+  // direct online purchase. All buy buttons link to the contact form instead.
+  const loading = false;
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -18,25 +20,10 @@ export default function RoboticsPage() {
     return () => observer.disconnect();
   }, []);
 
-  const handleBuy = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: drone.id }),
-      });
-      const { url, error } = await res.json();
-      if (url) window.location.href = url;
-      else console.error(error);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+  const handleInquire = () => {
+    window.location.href = "/#contact";
   };
 
-  const price = drone.price ?? 0;
 
   return (
     <main className="robotics-page">
@@ -72,15 +59,13 @@ export default function RoboticsPage() {
             The ARK Tactical X1 redefines what's possible in the sky.
           </p>
           <div className="robotics-hero-actions">
-            <button className="btn-primary" onClick={handleBuy} disabled={loading}>
-              {loading ? "Redirecting..." : (
-                <>
-                  Order Now — ${(price / 100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </>
-              )}
+            <button className="btn-primary" onClick={handleInquire} disabled={loading}>
+              <>
+                Contact for Inquiry
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </>
             </button>
             <a href="#specs" className="btn-secondary">View Specs</a>
           </div>
@@ -209,25 +194,23 @@ export default function RoboticsPage() {
                 </div>
               )}
 
-              {/* Price + CTA */}
+              {/* Availability + CTA */}
               <div className="detail-purchase">
                 <div className="detail-price-block">
-                  <span className="detail-price">${(price / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
-                  <span className="detail-price-note">Includes onboard AI module &amp; carry case</span>
+                  <span className="detail-price">Coming Soon</span>
+                  <span className="detail-price-note">Available by inquiry for qualified operators and institutional partners.</span>
                 </div>
                 <button
                   className="btn-primary detail-buy-btn"
-                  onClick={handleBuy}
+                  onClick={handleInquire}
                   disabled={loading}
                 >
-                  {loading ? "Redirecting..." : (
-                    <>
-                      Order Now
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </>
-                  )}
+                  <>
+                    Contact for Inquiry
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </>
                 </button>
               </div>
             </div>
@@ -351,15 +334,13 @@ export default function RoboticsPage() {
           <div className="section-label">Get Yours</div>
           <h2>Ready to Deploy<br /><span className="gradient-text">the X1?</span></h2>
           <p>Order today and receive full onboarding support, technical documentation, and access to the ARK control platform.</p>
-          <button className="btn-primary robotics-cta-btn" onClick={handleBuy} disabled={loading}>
-            {loading ? "Redirecting..." : (
-              <>
-                Order the ARK Tactical X1 — $1,299
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </>
-            )}
+          <button className="btn-primary robotics-cta-btn" onClick={handleInquire} disabled={loading}>
+            <>
+              Contact Sales About the ARK Tactical X1
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </>
           </button>
         </div>
       </section>
