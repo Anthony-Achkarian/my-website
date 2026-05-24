@@ -2,19 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 // Direct (non-Printful) products — fulfilled manually or via third-party logistics.
-// isPrintful: false means the webhook will skip Printful order creation.
-const directProducts = [
-  {
-    id: "ark-tactical-x1",
-    name: "ARK Tactical X1",
-    description:
-      "Mission-ready tactical drone. AI-assisted tracking, encrypted 4K video, thermal/night-vision compatible, 45 min flight time, 10 km range.",
-    image:
-      "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=900&q=80",
-    price: 129900, // $1,299.00 in cents
-    isPrintful: false,
-  },
-];
+// NOTE: The ARK Tactical X1 drone is intentionally inquiry-only and is NOT
+// listed here. Checkout for `ark-tactical-x1` is blocked below.
+const directProducts: Array<{
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  isPrintful: boolean;
+}> = [];
+
+// Products explicitly blocked from Stripe checkout (contact-sales only).
+const inquiryOnlyProductIds = new Set<string>(["ark-tactical-x1"]);
 
 // Printful-fulfilled products (kept in sync with lib/products.ts)
 const printfulProducts = [
@@ -84,6 +84,18 @@ export async function POST(request: NextRequest) {
   }
 
   const { productId, size, color } = body;
+
+  // ── Block inquiry-only products (e.g. ARK Tactical X1 drone) ───────────────
+  if (productId && inquiryOnlyProductIds.has(productId)) {
+    return NextResponse.json(
+      {
+        error:
+          "This product is not available for direct purchase. Please contact us for inquiries.",
+        inquiryOnly: true,
+      },
+      { status: 403 }
+    );
+  }
 
   // ── Check direct (non-Printful) products first ─────────────────────────────
   const directProduct = directProducts.find((p) => p.id === productId);
@@ -162,6 +174,7 @@ export async function POST(request: NextRequest) {
     shipping_address_collection: {
       allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK"],
     },
+    phone_number_collection: { enabled: true },
     metadata: {
       productId: product.id,
       printfulVariantId: String(printfulVariantId),

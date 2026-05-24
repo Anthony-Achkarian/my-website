@@ -103,11 +103,9 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-grid" />
         <div className="hero-content fade-up">
-          <div className="hero-badge">Building the Future</div>
-          <h1>Intelligence.<br /><span className="gradient-text">Engineered.</span></h1>
-          <p>Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development — shaping the infrastructure of tomorrow.</p>
+          <h1>Intelligence.<br />Engineered.</h1>
+          <p>Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development.</p>
           <div className="hero-buttons">
             <a href="#products" className="btn-primary">
               Explore Our Work
@@ -131,24 +129,19 @@ export default function Home() {
             <div className="product-visual">
               <div className="product-visual-inner">
                 <div className="app-mockup">
-                  <div className="app-mockup-dot">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
-                  </div>
                   <h4>Ask Ark</h4>
-                  <div className="app-mockup-input">Type your question...</div>
+                  <div className="app-mockup-input">Type your question…</div>
                   <div className="app-mockup-btn">Ask</div>
-                  <p style={{ fontSize: "0.65rem", color: "var(--gray-500)", marginTop: "0.75rem", lineHeight: 1.4 }}>Intelligent answers, powered by Ark AI.</p>
                 </div>
               </div>
             </div>
             <div className="product-info">
               <h3>Ask Ark — AI Assistant</h3>
-              <p>A conversational AI app built natively for iOS. Ask Ark delivers fast, contextual answers using our proprietary language model, designed for professionals and everyday users alike.</p>
+              <p>A conversational AI app built natively for iOS. Fast, contextual answers powered by our proprietary language model.</p>
               <ul className="product-features">
                 <li>Natural language understanding</li>
                 <li>Built on proprietary Ark AI models</li>
-                <li>Available on iOS with Android coming soon</li>
-                <li>Enterprise-ready with data privacy built in</li>
+                <li>Available on iOS, Android coming soon</li>
               </ul>
             </div>
           </div>
@@ -182,41 +175,26 @@ export default function Home() {
             </div>
             <div className="product-info">
               <h3>Autonomous Drone Platform</h3>
-              <p>Our multi-rotor autonomous platform is designed for industrial inspection, mapping, and logistics. Powered by onboard Ark AI for real-time navigation and decision-making.</p>
+              <p>Multi-rotor autonomous platform for industrial inspection, mapping, and logistics — powered by onboard Ark AI.</p>
               <ul className="product-features">
                 <li>6-rotor heavy-lift configuration</li>
                 <li>AI-powered autonomous navigation</li>
-                <li>Real-time 3D mapping and inspection</li>
+                <li>Real-time 3D mapping</li>
                 <li>Modular payload system</li>
               </ul>
             </div>
-          </div>
-
-          <div className="stats fade-up">
-            <div className="stat"><div className="stat-value">5</div><div className="stat-label">Product Divisions</div></div>
-            <div className="stat"><div className="stat-value">AI</div><div className="stat-label">First Approach</div></div>
-            <div className="stat"><div className="stat-value">24/7</div><div className="stat-label">Autonomous Ops</div></div>
-            <div className="stat"><div className="stat-value">∞</div><div className="stat-label">Possibilities</div></div>
           </div>
         </div>
       </section>
 
       {/* ABOUT */}
       <section id="about">
-        <div className="container">
-          <div className="about-grid">
-            <div className="about-text fade-up">
-              <div className="section-label">About Ark</div>
-              <div className="section-title">Shaping What&apos;s Next.</div>
-              <p>Ark Industries was founded on a simple belief: the future belongs to those who build it. We combine deep expertise across artificial intelligence, robotics engineering, and real estate development to create integrated solutions that push boundaries.</p>
-              <p>Our team of engineers, designers, and strategists work across disciplines to deliver products and properties that are smarter, more efficient, and built to last.</p>
-            </div>
-            <div className="about-values fade-up">
-              <div className="value-item"><h4>Innovation</h4><p>Pushing the limits of what technology can achieve.</p></div>
-              <div className="value-item"><h4>Precision</h4><p>Every detail matters, from code to concrete.</p></div>
-              <div className="value-item"><h4>Integration</h4><p>AI, hardware, and spaces working as one.</p></div>
-              <div className="value-item"><h4>Impact</h4><p>Building things that matter for the real world.</p></div>
-            </div>
+        <div className="container about-container">
+          <div className="about-text fade-up">
+            <div className="section-label">About</div>
+            <div className="section-title">Shaping What&apos;s Next.</div>
+            <p>Ark Industries was founded on a simple belief: the future belongs to those who build it. We combine deep expertise across AI, robotics engineering, and real estate development to create integrated solutions that push boundaries.</p>
+            <p>Our team works across disciplines to deliver products and properties that are smarter, more efficient, and built to last.</p>
           </div>
         </div>
       </section>
@@ -224,11 +202,11 @@ export default function Home() {
       {/* CAREERS */}
       <section id="careers" className="careers-section">
         <div className="container">
-          <div className="fade-up" style={{ textAlign: "center", marginBottom: "4rem" }}>
+          <div className="fade-up" style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="section-label">Join the Team</div>
-            <div className="section-title">Build What&apos;s Next<br /><span className="gradient-text">With Us.</span></div>
+            <div className="section-title">Build What&apos;s Next With Us.</div>
             <p className="section-sub" style={{ margin: "0 auto" }}>
-              We&apos;re assembling a team of builders, thinkers, and doers obsessed with bringing transformative technology to life. If you want to work on problems that matter, you&apos;re in the right place.
+              We&apos;re assembling a team of builders obsessed with bringing transformative technology to life.
             </p>
             <a href="/careers" className="btn-primary" style={{ marginTop: "2rem", display: "inline-flex" }}>
               View All Openings
@@ -237,37 +215,22 @@ export default function Home() {
           </div>
           <div className="careers-grid fade-up">
             <div className="career-card">
-              <div className="career-card-top">
-                <div className="career-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M12 2v4" /><circle cx="12" cy="12" r="2" /><path d="M2 12h4M18 12h4" /></svg>
-                </div>
-                <div className="career-meta"><span className="career-dept">Robotics</span><span className="career-type">Full-time</span></div>
-              </div>
+              <span className="career-dept">Robotics</span>
               <h3>Robotics Engineer</h3>
-              <p>Design and build next-generation autonomous systems. You&apos;ll work on hardware-software integration, motion planning, and real-world deployment of ARK&apos;s robotic platforms.</p>
-              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
+              <p>Design and build next-generation autonomous systems — hardware-software integration, motion planning, and real-world deployment.</p>
+              <a href="/careers#apply" className="career-apply-link">Apply →</a>
             </div>
             <div className="career-card">
-              <div className="career-card-top">
-                <div className="career-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" /><path d="M16 14a4 4 0 0 1 0 8H8a4 4 0 0 1 0-8" /><line x1="12" y1="8" x2="12" y2="14" /></svg>
-                </div>
-                <div className="career-meta"><span className="career-dept">AI / ML</span><span className="career-type">Full-time</span></div>
-              </div>
+              <span className="career-dept">AI / ML</span>
               <h3>AI/ML Engineer</h3>
-              <p>Develop and optimize the intelligence layer powering ARK&apos;s products — from onboard drone AI to large-scale inference infrastructure and our proprietary language models.</p>
-              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
+              <p>Develop the intelligence layer powering ARK&apos;s products — from onboard drone AI to our proprietary language models.</p>
+              <a href="/careers#apply" className="career-apply-link">Apply →</a>
             </div>
             <div className="career-card">
-              <div className="career-card-top">
-                <div className="career-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
-                </div>
-                <div className="career-meta"><span className="career-dept">Engineering</span><span className="career-type">Full-time</span></div>
-              </div>
+              <span className="career-dept">Engineering</span>
               <h3>Full Stack Developer</h3>
-              <p>Build the software platforms, dashboards, and APIs that bring ARK&apos;s hardware and AI products to life. You&apos;ll own end-to-end features across web, mobile, and embedded systems.</p>
-              <a href="/careers#apply" className="btn-secondary career-apply-btn">Apply Now →</a>
+              <p>Build the platforms, dashboards, and APIs that bring ARK&apos;s hardware and AI products to life.</p>
+              <a href="/careers#apply" className="career-apply-link">Apply →</a>
             </div>
           </div>
         </div>
@@ -277,8 +240,8 @@ export default function Home() {
       <section className="cta-section" id="contact">
         <div className="cta-content fade-up">
           <div className="section-label">Get Started</div>
-          <h2>Ready to Build<br />the Future Together?</h2>
-          <p>Whether you&apos;re interested in our AI products, robotics partnerships, or real estate ventures — let&apos;s talk.</p>
+          <h2>Let&apos;s Build the Future Together.</h2>
+          <p>AI products, robotics partnerships, real estate ventures — let&apos;s talk.</p>
 
           {status === "success" ? (
             <div className="contact-success">
