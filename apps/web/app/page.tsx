@@ -179,14 +179,14 @@ export default function Home() {
             <div className="product-visual">
               <div className="product-visual-inner">
                 <div className="app-mockup">
-                  <h4>Ask Ark</h4>
+                  <h4>Ark AI</h4>
                   <div className="app-mockup-input">Type your question…</div>
                   <div className="app-mockup-btn">Ask</div>
                 </div>
               </div>
             </div>
             <div className="product-info">
-              <h3>Ask Ark — AI Assistant</h3>
+              <h3>Ark AI — Conversational Assistant</h3>
               <p>A conversational AI app built natively for iOS. Fast, contextual answers powered by our proprietary language model.</p>
               <ul className="product-features">
                 <li>Built on proprietary Ark AI models</li>

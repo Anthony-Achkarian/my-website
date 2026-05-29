@@ -27,7 +27,7 @@ const openings = [
     dept: "AI / ML",
     type: "Full-time",
     location: "Remote",
-    desc: "Develop and optimize the intelligence layer powering ARK's products — from onboard drone AI to large-scale inference infrastructure and our proprietary language models for the Ask Ark platform.",
+    desc: "Develop and optimize the intelligence layer powering ARK's products — from onboard drone AI to large-scale inference infrastructure and our proprietary language models for the Ark AI platform.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14a4 4 0 0 1 0 8H8a4 4 0 0 1 0-8"/><line x1="12" y1="8" x2="12" y2="14"/>
