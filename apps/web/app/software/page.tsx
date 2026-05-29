@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ParticleField from "../components/ParticleField";
 
 
 
@@ -94,6 +95,9 @@ export default function SoftwarePage() {
       <section className="studio-hero">
         <div className="studio-hero-bg" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920&q=80')" }} />
         <div className="studio-hero-overlay" />
+        <ParticleField />
+        <div className="hero-orb orb-1" aria-hidden="true" />
+        <div className="hero-orb orb-2" aria-hidden="true" />
         <div className="studio-hero-content fade-up">
           <div className="studio-eyebrow">
             <span className="studio-badge-soon">Coming Soon</span>

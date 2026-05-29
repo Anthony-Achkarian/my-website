@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ParticleField from "./components/ParticleField";
 
 export default function Home() {
   const navRef = useRef<HTMLElement>(null);
@@ -33,20 +34,62 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // ── Staggered scroll reveals ──
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add("visible"); observer.unobserve(e.target); } }),
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+    document.querySelectorAll<HTMLElement>(".fade-up").forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i * 70, 350)}ms`;
+      observer.observe(el);
+    });
 
+    // ── Count-up stats ──
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.count || "0", 10);
+        const suffix = el.dataset.suffix || "";
+        const dur = 1400;
+        const start = performance.now();
+        const step = (now: number) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => countObserver.observe(el));
+
+    // ── Card spotlight follow ──
+    const onCardMove = (e: PointerEvent) => {
+      const card = (e.target as HTMLElement).closest<HTMLElement>(".career-card");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    document.addEventListener("pointermove", onCardMove);
+
+    // ── Scroll: nav background ──
     const onScroll = () => {
       if (navRef.current) {
         navRef.current.style.background =
           window.scrollY > 50 ? "rgba(10,22,40,0.95)" : "rgba(10,22,40,0.85)";
       }
     };
-    window.addEventListener("scroll", onScroll);
-    return () => { observer.disconnect(); window.removeEventListener("scroll", onScroll); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      countObserver.disconnect();
+      document.removeEventListener("pointermove", onCardMove);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -103,8 +146,13 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero">
+        <ParticleField />
+        <div className="hero-orb orb-1" aria-hidden="true" />
+        <div className="hero-orb orb-2" aria-hidden="true" />
+        <div className="hero-orb orb-3" aria-hidden="true" />
         <div className="hero-content fade-up">
-          <h1>Intelligence.<br />Engineered.</h1>
+          <span className="hero-pill"><span className="pulse-dot" />Building the infrastructure of tomorrow</span>
+          <h1>Intelligence.<br /><span className="gradient-text">Engineered.</span></h1>
           <p>Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development.</p>
           <div className="hero-buttons">
             <a href="#products" className="btn-primary">
@@ -112,6 +160,28 @@ export default function Home() {
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a href="#contact" className="btn-secondary">Contact Us</a>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="stats-band">
+        <div className="stats-grid">
+          <div className="stat-item fade-up">
+            <div className="stat-number" data-count="6">0</div>
+            <div className="stat-label">Divisions</div>
+          </div>
+          <div className="stat-item fade-up">
+            <div className="stat-number" data-count="1">0</div>
+            <div className="stat-label">Live Products</div>
+          </div>
+          <div className="stat-item fade-up">
+            <div className="stat-number" data-count="5">0</div>
+            <div className="stat-label">In Development</div>
+          </div>
+          <div className="stat-item fade-up">
+            <div className="stat-number" data-count="24" data-suffix="/7">0</div>
+            <div className="stat-label">Autonomy</div>
           </div>
         </div>
       </section>

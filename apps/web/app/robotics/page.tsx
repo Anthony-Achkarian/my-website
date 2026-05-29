@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { products } from "../../lib/products";
+import ParticleField from "../components/ParticleField";
 
 const drone = products.find((p) => p.id === "ark-tactical-x1")!;
 
@@ -47,6 +48,7 @@ export default function RoboticsPage() {
       <section className="robotics-hero" ref={heroRef}>
         <div className="robotics-hero-grid" />
         <div className="robotics-hero-glow" />
+        <ParticleField />
 
         <div className="robotics-hero-content fade-up">
           <div className="hero-badge">ARK Robotics Division</div>

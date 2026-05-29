@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ParticleField from "../components/ParticleField";
 
 
 
@@ -44,6 +45,9 @@ export default function HealthPage() {
       <section className="cs-hero">
         <div className="cs-hero-bg" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1920&q=80')" }} />
         <div className="cs-hero-overlay" />
+        <ParticleField />
+        <div className="hero-orb orb-1" aria-hidden="true" />
+        <div className="hero-orb orb-2" aria-hidden="true" />
         <div className="cs-hero-content fade-up">
           <div className="hero-badge">Coming Soon — ARK Health</div>
           <h1>Human Health.<br /><span className="gradient-text">Optimized.</span></h1>
