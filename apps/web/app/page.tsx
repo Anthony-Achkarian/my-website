@@ -237,7 +237,6 @@ export default function Home() {
       {/* CONTACT */}
       <section className="cta-section" id="contact">
         <div className="cta-content fade-up">
-          <div className="section-label">Get Started</div>
           <h2>Let&apos;s Build the Future Together.</h2>
           <p>AI products, robotics partnerships, real estate ventures — let&apos;s talk.</p>
 
