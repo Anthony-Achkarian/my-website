@@ -174,7 +174,8 @@ export default function Home() {
             <p className="section-sub">Every product at Ark Industries is designed from the ground up to solve real problems at scale.</p>
           </div>
 
-          <div className="product-row fade-up">
+          <div className="product-grid fade-up">
+          <div className="product-card">
             <div className="product-visual">
               <div className="product-visual-inner">
                 <div className="app-mockup">
@@ -194,10 +195,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="product-row reverse fade-up" style={{ marginTop: "5rem" }}>
+          <div className="product-card">
             <div className="product-visual">
               <div className="product-visual-inner">
-                <svg viewBox="0 0 300 220" width="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 300 220" width="180" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="115" y="90" width="70" height="45" rx="6" fill="#334155" stroke="#475569" strokeWidth="1.5" />
                   <rect x="125" y="80" width="50" height="15" rx="4" fill="#3b82f6" fillOpacity="0.3" stroke="#3b82f6" strokeWidth="0.5" />
                   <circle cx="150" cy="140" r="6" fill="#1e293b" stroke="#3b82f6" strokeWidth="1" />
@@ -229,6 +230,7 @@ export default function Home() {
                 <li>Real-time 3D mapping</li>
               </ul>
             </div>
+          </div>
           </div>
         </div>
       </section>
