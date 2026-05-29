@@ -133,6 +133,7 @@ export default function Home() {
           <a href="#about">About</a>
           <a href="/careers">Careers</a>
           <a href="/merch">Merch</a>
+          <a href="/invest">Invest</a>
           <a href="#contact" className="nav-cta">Get in Touch</a>
         </div>
         <button
@@ -364,6 +365,7 @@ export default function Home() {
             <a href="/health">Health</a>
             <a href="/housing">Housing</a>
             <a href="/careers">Careers</a>
+            <a href="/invest">Invest</a>
             <a href="#about">About</a>
             <a href="mailto:anthonyachkarian@gmail.com">Contact</a>
           </div>
