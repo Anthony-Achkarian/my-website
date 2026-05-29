@@ -130,7 +130,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <a href="#about">About</a>
           <a href="/careers">Careers</a>
           <a href="/merch">Merch</a>
           <a href="/invest">Invest</a>
@@ -186,7 +185,7 @@ export default function Home() {
               </div>
             </div>
             <div className="product-info">
-              <h3>Ark AI — Conversational Assistant</h3>
+              <h3>Ark AI</h3>
               <p>A conversational AI app built natively for iOS. Fast, contextual answers powered by our proprietary language model.</p>
               <ul className="product-features">
                 <li>Built on proprietary Ark AI models</li>
@@ -231,34 +230,6 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about">
-        <div className="container about-container">
-          <div className="about-text fade-up">
-            <div className="section-label">About</div>
-            <div className="section-title">Shaping What&apos;s Next.</div>
-            <p>The future belongs to those who build it. We combine deep expertise across AI, robotics, and real estate development to create integrated solutions that are smarter, more efficient, and built to last.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* CAREERS */}
-      <section id="careers" className="careers-section">
-        <div className="container">
-          <div className="fade-up" style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div className="section-label">Join the Team</div>
-            <div className="section-title">Build What&apos;s Next With Us.</div>
-            <p className="section-sub" style={{ margin: "0 auto" }}>
-              We&apos;re assembling a team of builders obsessed with bringing transformative technology to life.
-            </p>
-            <a href="/careers" className="btn-primary" style={{ marginTop: "2rem", display: "inline-flex" }}>
-              View All Openings
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </a>
           </div>
         </div>
       </section>
@@ -322,7 +293,6 @@ export default function Home() {
             <a href="/housing">Housing</a>
             <a href="/careers">Careers</a>
             <a href="/invest">Invest</a>
-            <a href="#about">About</a>
             <a href="mailto:anthonyachkarian@gmail.com">Contact</a>
           </div>
         </div>
