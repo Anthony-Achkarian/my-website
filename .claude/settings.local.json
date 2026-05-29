@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ssh -T git@github.com)",
+      "Bash(mkdir -p ~/.ssh)",
+      "Bash(ssh-keygen -t ed25519 -C \"anthonyachkarian@github\" -f ~/.ssh/id_ed25519 -N \"\")",
+      "mcp__Desktop_Commander__list_directory",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Desktop_Commander__read_file",
+      "Bash(npm install:*)",
+      "Bash(npx create-expo-app@latest mobile --template blank-typescript)",
+      "Bash(find /Users/anthonyachkarian -name *.html -not -path */node_modules/* -not -path */.git/*)"
+    ]
+  }
+}

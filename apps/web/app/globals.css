@@ -164,7 +164,7 @@ section { padding: 6rem 2rem; }
 footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .footer-left { display: flex; align-items: center; gap: 2rem; }
-.footer-left svg { height: 26px; width: auto; }
+.footer-left svg, .footer-left img { height: 26px; width: auto; }
 .footer-copy { color: var(--gray-600); font-size: 0.8rem; }
 .footer-links { display: flex; gap: 2rem; }
 .footer-links a { color: var(--gray-500); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
