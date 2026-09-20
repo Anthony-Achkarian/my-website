@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import { products } from "../../lib/products";
 import ParticleField from "../components/ParticleField";
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 
 const drone = products.find((p) => p.id === "ark-tactical-x1")!;
 
@@ -30,19 +32,7 @@ export default function RoboticsPage() {
     <main className="robotics-page">
 
       {/* NAV */}
-      <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
-        <div className="sub-nav-links">
-          
-          <a href="/software">ARK Studio</a>
-          <a href="/robotics" className="active">Robotics</a>
-          <a href="/quantum" className="hide-md">Quantum</a>
-          <a href="/data-centers" className="hide-md">Data Centers</a>
-          <a href="/health" className="hide-md">Health</a>
-          <a href="/housing" className="hide-md">Housing</a>
-          <a href="/#contact" className="nav-cta">Get in Touch</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* ── Hero ── */}
       <section className="robotics-hero" ref={heroRef}>
@@ -351,7 +341,7 @@ export default function RoboticsPage() {
         /* ── Page Base ── */
         .robotics-page {
           background: var(--navy);
-          padding-top: 80px;
+          padding-top: var(--nav-h);
           min-height: 100vh;
         }
 
@@ -804,6 +794,7 @@ export default function RoboticsPage() {
         }
 
       `}</style>
+      <SiteFooter />
     </main>
   );
 }

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { products, Product, getVariant } from "../../lib/products";
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 
 // ── Merch card (Apparel / Accessories) ──────────────────────────────────────
 function ProductCard({ product }: { product: Product }) {
@@ -74,19 +76,7 @@ export default function MerchPage() {
   return (
     <main className="merch-page">
       {/* NAV */}
-      <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
-        <div className="sub-nav-links">
-          <a href="/software">ARK Studio</a>
-          <a href="/robotics">Robotics</a>
-          <a href="/quantum" className="hide-md">Quantum</a>
-          <a href="/data-centers" className="hide-md">Data Centers</a>
-          <a href="/health" className="hide-md">Health</a>
-          <a href="/housing" className="hide-md">Housing</a>
-          <a href="/merch" className="active hide-sm">Merch</a>
-          <a href="/#contact" className="nav-cta">Get in Touch</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       <div className="merch-hero">
         <div className="hero-badge">ARK Store</div>
@@ -108,6 +98,7 @@ export default function MerchPage() {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

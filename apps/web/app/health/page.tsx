@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import ParticleField from "../components/ParticleField";
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 
 
 
@@ -27,19 +29,7 @@ export default function HealthPage() {
   return (
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
-      <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
-        <div className="sub-nav-links">
-          
-          <a href="/software">ARK Studio</a>
-          <a href="/robotics">Robotics</a>
-          <a href="/quantum" className="hide-md">Quantum</a>
-          <a href="/data-centers" className="hide-md">Data Centers</a>
-          <a href="/health" className="active">Health</a>
-          <a href="/housing" className="hide-md">Housing</a>
-          <a href="/#contact" className="nav-cta">Get in Touch</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* HERO */}
       <section className="cs-hero">
@@ -120,24 +110,13 @@ export default function HealthPage() {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="footer-inner">
-          <div className="footer-left">
-            <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
-          </div>
-          <div className="footer-links">
-            <a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
-            <a href="/data-centers" className="hide-md">Data Centers</a><a href="/health" className="hide-md">Health</a><a href="/housing" className="hide-md">Housing</a>
-            <a href="/#contact">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <style>{`
         .cs-hero {
           position: relative; min-height: 100vh;
           display: flex; align-items: center; justify-content: center;
-          padding: 10rem 2rem 6rem; text-align: center; overflow: hidden;
+          padding: calc(var(--nav-h) + 4.5rem) var(--gutter) 6rem; text-align: center; overflow: hidden;
         }
         .cs-hero-bg {
           position: absolute; inset: 0;
@@ -190,7 +169,7 @@ export default function HealthPage() {
         .cs-pillar h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
         .cs-pillar p { font-size: 0.9rem; color: var(--gray-400); line-height: 1.65; }
         @media (max-width: 900px) { .cs-pillars { grid-template-columns: 1fr; } }
-        @media (max-width: 640px) { .cs-hero { padding: 8rem 1.5rem 4rem; } }
+        @media (max-width: 640px) { .cs-hero { padding: calc(var(--nav-h) + 3rem) var(--gutter) 4rem; } }
         .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: none; }
 `}</style>

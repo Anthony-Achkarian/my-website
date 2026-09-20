@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-const ArkLogo = () => (
-  <img src="/logo.png" alt="ARK" />
-);
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 
 const INVESTOR_TYPES = [
   "Angel Investor",
@@ -105,19 +103,7 @@ export default function InvestPage() {
   return (
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
-      <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><ArkLogo /></a>
-        <div className="sub-nav-links">
-          <a href="/">Home</a>
-          <a href="/robotics">Robotics</a>
-          <a href="/quantum">Quantum</a>
-          <a href="/data-centers">Data Centers</a>
-          <a href="/health">Health</a>
-          <a href="/housing">Housing</a>
-          <a href="/invest" className="active">Invest</a>
-          <a href="/#contact" className="nav-cta">Get in Touch</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* HERO */}
       <section className="careers-hero">
@@ -266,25 +252,13 @@ export default function InvestPage() {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="footer-inner">
-          <div className="footer-left">
-            <ArkLogo />
-            <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
-          </div>
-          <div className="footer-links">
-            <a href="/">Home</a><a href="/robotics">Robotics</a><a href="/quantum">Quantum</a>
-            <a href="/data-centers">Data Centers</a><a href="/health">Health</a><a href="/housing">Housing</a>
-            <a href="/careers">Careers</a><a href="/invest">Invest</a><a href="/#contact">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <style>{`
         .careers-hero {
           position: relative; min-height: 80vh;
           display: flex; align-items: center;
-          padding: 10rem 6vw 6rem; overflow: hidden;
+          padding: calc(var(--nav-h) + 4.5rem) 6vw 6rem; overflow: hidden;
         }
         .careers-hero-grid {
           position: absolute; inset: 0;
@@ -365,7 +339,7 @@ export default function InvestPage() {
           .careers-apply-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 640px) {
-          .careers-hero { padding: 8rem 1.5rem 4rem; }
+          .careers-hero { padding: calc(var(--nav-h) + 3rem) var(--gutter) 4rem; }
           .careers-form-wrap { padding: 1.75rem; }
           .invest-stats { grid-template-columns: 1fr 1fr; }
         }

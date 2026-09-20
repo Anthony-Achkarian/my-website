@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import ParticleField from "../components/ParticleField";
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 
 
 
@@ -77,19 +79,7 @@ export default function SoftwarePage() {
   return (
     <main style={{ background: "var(--navy)", minHeight: "100vh" }}>
       {/* NAV */}
-      <nav className="sub-nav">
-        <a href="/" className="sub-nav-logo"><img src="/logo.png" alt="ARK" /></a>
-        <div className="sub-nav-links">
-          
-          <a href="/software" className="active">ARK Studio</a>
-          <a href="/robotics">Robotics</a>
-          <a href="/quantum" className="hide-md">Quantum</a>
-          <a href="/data-centers" className="hide-md">Data Centers</a>
-          <a href="/health" className="hide-md">Health</a>
-          <a href="/housing" className="hide-md">Housing</a>
-          <a href="/#contact" className="nav-cta">Get in Touch</a>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* HERO */}
       <section className="studio-hero">
@@ -350,24 +340,13 @@ export default function SoftwarePage() {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="footer-inner">
-          <div className="footer-left">
-            <span className="footer-copy">&copy; 2026 Ark Industries. All rights reserved.</span>
-          </div>
-          <div className="footer-links">
-            <a href="/robotics">Robotics</a><a href="/quantum" className="hide-md">Quantum</a>
-            <a href="/data-centers" className="hide-md">Data Centers</a><a href="/health" className="hide-md">Health</a><a href="/housing" className="hide-md">Housing</a>
-            <a href="/software">ARK Studio</a><a href="/#contact">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <style>{`
         .studio-hero {
           position: relative; min-height: 100vh;
           display: flex; align-items: center; justify-content: center;
-          padding: 10rem 2rem 6rem; text-align: center; overflow: hidden;
+          padding: calc(var(--nav-h) + 4.5rem) var(--gutter) 6rem; text-align: center; overflow: hidden;
         }
         .studio-hero-bg {
           position: absolute; inset: 0; background-size: cover; background-position: center;
@@ -493,7 +472,7 @@ export default function SoftwarePage() {
           .studio-specs-grid { grid-template-columns: repeat(2,1fr); }
         }
         @media (max-width: 640px) {
-          .studio-hero { padding: 8rem 1.5rem 4rem; }
+          .studio-hero { padding: calc(var(--nav-h) + 3rem) var(--gutter) 4rem; }
           .studio-specs-grid { grid-template-columns: 1fr; }
           .studio-notify-inline { flex-direction: column; width: 100%; }
           .studio-email-input { width: 100%; }

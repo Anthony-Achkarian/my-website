@@ -1,26 +1,42 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "./components/ScrollProgress";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Ark Industries — AI, Robotics & Real Estate",
+  metadataBase: new URL("https://arkindustriestech.com"),
+  title: {
+    default: "Ark Industries — AI, Robotics & Real Estate",
+    template: "%s — Ark Industries",
+  },
   description:
     "Ark Industries operates at the intersection of artificial intelligence, advanced robotics, and real estate development — shaping the infrastructure of tomorrow.",
+  openGraph: {
+    type: "website",
+    siteName: "Ark Industries",
+    title: "Ark Industries — AI, Robotics & Real Estate",
+    description:
+      "Artificial intelligence, advanced robotics, and real estate development — engineered into the infrastructure of tomorrow.",
+    url: "https://arkindustriestech.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ark Industries — AI, Robotics & Real Estate",
+    description:
+      "Artificial intelligence, advanced robotics, and real estate development — engineered into the infrastructure of tomorrow.",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a1628",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className={inter.className}>
         <ScrollProgress />
         {children}
