@@ -1,29 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { getShippingDetails } from "../../../lib/checkout-shipping";
 
-// Stripe v21 types: shipping_details on Checkout.Session
-type CheckoutSession = Stripe.Checkout.Session & {
-  shipping_details?: {
-    name?: string | null;
-    address?: {
-      line1?: string | null;
-      line2?: string | null;
-      city?: string | null;
-      state?: string | null;
-      country?: string | null;
-      postal_code?: string | null;
-    } | null;
-  } | null;
-};
+async function createPrintfulOrder(session: Stripe.Checkout.Session) {
+  // Direct (non-Printful) products are fulfilled by hand.
+  const isPrintful = session.metadata?.isPrintful !== "false";
+  if (!isPrintful) return;
 
-async function createPrintfulOrder(session: CheckoutSession) {
-  const shipping = session.shipping_details;
+  const shipping = getShippingDetails(session);
   const variantId = Number(session.metadata?.printfulVariantId);
   const size = session.metadata?.size;
-  const isPrintful = session.metadata?.isPrintful !== "false";
 
-  // Skip Printful fulfillment for direct products (e.g. ARK Tactical X1)
-  if (!isPrintful || !shipping?.address || !variantId) return;
+  // A paid Printful order without an address or variant is a failure, not a
+  // skip. Throwing makes the webhook return 500, so Stripe retries and flags
+  // the failed delivery in the dashboard instead of the order vanishing.
+  if (!shipping?.address || !variantId) {
+    throw new Error(
+      `Checkout ${session.id} has no ${!variantId ? "Printful variant id" : "shipping address"}`
+    );
+  }
 
   const body = {
     // Idempotency: if Stripe retries the webhook, Printful will return the
@@ -97,7 +92,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (stripeEvent.type === "checkout.session.completed") {
-    const session = stripeEvent.data.object as CheckoutSession;
+    const session = stripeEvent.data.object as Stripe.Checkout.Session;
     try {
       await createPrintfulOrder(session);
     } catch (err) {
