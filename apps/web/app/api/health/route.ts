@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { printfulHeaders } from "../../../lib/printful";
 
 export const dynamic = "force-dynamic";
 
@@ -9,8 +10,10 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   let printful: string;
   try {
-    const res = await fetch("https://api.printful.com/stores", {
-      headers: { Authorization: `Bearer ${process.env.PRINTFUL_API_KEY ?? ""}` },
+    // Same headers and scope the order webhook uses, so "ok" means
+    // fulfilment can actually authenticate.
+    const res = await fetch("https://api.printful.com/orders?limit=1", {
+      headers: printfulHeaders(),
       cache: "no-store",
     });
     printful = res.ok ? "ok" : `error ${res.status}`;

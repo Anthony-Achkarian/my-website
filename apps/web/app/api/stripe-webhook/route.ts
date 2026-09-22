@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getShippingDetails } from "../../../lib/checkout-shipping";
+import { printfulHeaders } from "../../../lib/printful";
 
 async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   // Direct (non-Printful) products are fulfilled by hand.
@@ -52,10 +53,7 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   // (instead of leaving it as a draft). This is required for live mode.
   const res = await fetch("https://api.printful.com/orders?confirm=true", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.PRINTFUL_API_KEY}`,
-      "Content-Type": "application/json",
-    },
+    headers: printfulHeaders(),
     body: JSON.stringify(body),
   });
 
