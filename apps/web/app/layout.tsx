@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://arkindustriestech.com"),
   title: {
-    default: "Ark Industries — AI, Robotics & Real Estate",
+    default: "Ark Industries — Robotics & Compute",
     template: "%s — Ark Industries",
   },
   description:
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Ark Industries",
-    title: "Ark Industries — AI, Robotics & Real Estate",
+    title: "Ark Industries — Robotics & Compute",
     description:
       "Artificial intelligence, advanced robotics, and real estate development — engineered into the infrastructure of tomorrow.",
     url: "https://arkindustriestech.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ark Industries — AI, Robotics & Real Estate",
+    title: "Ark Industries — Robotics & Compute",
     description:
       "Artificial intelligence, advanced robotics, and real estate development — engineered into the infrastructure of tomorrow.",
   },
