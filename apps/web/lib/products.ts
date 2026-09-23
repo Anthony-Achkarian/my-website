@@ -45,7 +45,7 @@ export const products: Product[] = [
   // ── Apparel ──────────────────────────────────────────────────────────────────
   {
     id: "ark-sweatshirt",
-    name: "ARK Organic Sweatshirt",
+    name: "Sweatshirt",
     description: "Unisex organic cotton sweatshirt with the ARK Industries logo. Sustainably made.",
     image: "https://files.cdn.printful.com/files/ec5/ec5bf54b175253024d5c5ef1374a35af_preview.png",
     category: "Apparel",
@@ -60,7 +60,7 @@ export const products: Product[] = [
   },
   {
     id: "ark-tshirt",
-    name: "ARK Organic T-Shirt",
+    name: "T-Shirt",
     description: "Unisex organic cotton tee with the ARK Industries logo. Lightweight and sustainably made.",
     image: "https://files.cdn.printful.com/files/8ab/8ab930ae7fe5fdd6c76480e18f570023_preview.png",
     category: "Apparel",
@@ -75,7 +75,7 @@ export const products: Product[] = [
   },
   {
     id: "ark-hoodie",
-    name: "ARK Organic Hoodie",
+    name: "Hoodie",
     description: "Unisex organic mid-weight hoodie with the ARK Industries logo. Cozy and sustainably made.",
     image: "https://files.cdn.printful.com/files/e34/e346ba92d0ac6aa5e05c7488c3b343e2_preview.png",
     category: "Apparel",
