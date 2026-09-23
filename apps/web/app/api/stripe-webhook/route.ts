@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getShippingDetails } from "../../../lib/checkout-shipping";
-import { printfulHeaders } from "../../../lib/printful";
+import { printfulHeaders, printfulOrderItem } from "../../../lib/printful";
 
 async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   // Direct (non-Printful) products are fulfilled by hand.
@@ -10,7 +10,6 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
 
   const shipping = getShippingDetails(session);
   const variantId = Number(session.metadata?.printfulVariantId);
-  const size = session.metadata?.size;
 
   // A paid Printful order without an address or variant is a failure, not a
   // skip. Throwing makes the webhook return 500, so Stripe retries and flags
@@ -36,13 +35,7 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
       email: session.customer_details?.email || "",
       phone: session.customer_details?.phone || "",
     },
-    items: [
-      {
-        variant_id: variantId,
-        quantity: 1,
-        ...(size ? { name: size } : {}),
-      },
-    ],
+    items: [printfulOrderItem(variantId)],
     retail_costs: {
       subtotal: ((session.amount_total ?? 0) / 100).toFixed(2),
       currency: "USD",
