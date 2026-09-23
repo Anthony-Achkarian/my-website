@@ -1,80 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { getProductById, getVariant } from "../../../lib/products";
+import { printfulRefOf } from "../../../lib/printful";
 
-// Direct (non-Printful) products — fulfilled manually or via third-party logistics.
-// NOTE: The ARK Tactical X1 drone is intentionally inquiry-only and is NOT
-// listed here. Checkout for `ark-tactical-x1` is blocked below.
-const directProducts: Array<{
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  isPrintful: boolean;
-}> = [];
-
-// Products explicitly blocked from Stripe checkout (contact-sales only).
+// Products that are shown on the site but sold by inquiry only.
+// The ARK Tactical X1 drone routes buyers to the contact form instead.
 const inquiryOnlyProductIds = new Set<string>(["ark-tactical-x1"]);
 
-// Printful-fulfilled products (kept in sync with lib/products.ts)
-const printfulProducts = [
-  {
-    id: "ark-sweatshirt",
-    name: "Sweatshirt",
-    description: "Unisex organic cotton sweatshirt with the ARK Industries logo. Sustainably made.",
-    image: "https://files.cdn.printful.com/files/ec5/ec5bf54b175253024d5c5ef1374a35af_preview.png",
-    variants: [
-      { size: "S",   color: "French Navy", printfulVariantId: 5246862150, price: 5500 },
-      { size: "M",   color: "French Navy", printfulVariantId: 5246862149, price: 5500 },
-      { size: "L",   color: "French Navy", printfulVariantId: 5246862148, price: 5500 },
-      { size: "XL",  color: "French Navy", printfulVariantId: 5246862151, price: 5500 },
-      { size: "2XL", color: "French Navy", printfulVariantId: 5246862147, price: 5800 },
-    ],
-  },
-  {
-    id: "ark-tshirt",
-    name: "T-Shirt",
-    description: "Unisex organic cotton tee with the ARK Industries logo. Lightweight and sustainably made.",
-    image: "https://files.cdn.printful.com/files/8ab/8ab930ae7fe5fdd6c76480e18f570023_preview.png",
-    variants: [
-      { size: "S",   color: "French Navy", printfulVariantId: 5246862152, price: 3500 },
-      { size: "M",   color: "French Navy", printfulVariantId: 5246862153, price: 3500 },
-      { size: "L",   color: "French Navy", printfulVariantId: 5246862154, price: 3500 },
-      { size: "XL",  color: "French Navy", printfulVariantId: 5246862155, price: 3500 },
-      { size: "2XL", color: "French Navy", printfulVariantId: 5246862156, price: 3800 },
-    ],
-  },
-  {
-    id: "ark-hoodie",
-    name: "Hoodie",
-    description: "Unisex organic mid-weight hoodie with the ARK Industries logo. Cozy and sustainably made.",
-    image: "https://files.cdn.printful.com/files/e34/e346ba92d0ac6aa5e05c7488c3b343e2_preview.png",
-    variants: [
-      { size: "S",   color: "French Navy", printfulVariantId: 5246862157, price: 6500 },
-      { size: "M",   color: "French Navy", printfulVariantId: 5246862158, price: 6500 },
-      { size: "L",   color: "French Navy", printfulVariantId: 5246862159, price: 6500 },
-      { size: "XL",  color: "French Navy", printfulVariantId: 5246862160, price: 6500 },
-      { size: "2XL", color: "French Navy", printfulVariantId: 5246862161, price: 6800 },
-    ],
-  },
-  {
-    id: "ark-mug",
-    name: "ARK Mug",
-    description: "Black glossy 11oz mug with the ARK Industries logo in white. Perfect for your morning coffee.",
-    image: "https://files.cdn.printful.com/files/6f7/6f765803464d06fd1de0a482de7af35f_preview.png",
-    printfulVariantId: 5246862162,
-    price: 2500,
-  },
-  {
-    id: "ark-water-bottle",
-    name: "ARK Water Bottle",
-    description: "Stainless steel 17oz water bottle with the ARK Industries logo in white. Keeps drinks cold or hot.",
-    image: "https://files.cdn.printful.com/files/7f7/7f7d72c6f8c8fb4d6588458b7bbbdadc_preview.png",
-    printfulVariantId: 5246862163,
-    price: 4500,
-  },
+const SHIPPING_COUNTRIES: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] = [
+  "US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK",
 ];
 
+/**
+ * Creates a Stripe Checkout session for one merch item.
+ *
+ * Product names, prices, images and Printful ids all come from
+ * lib/products.ts, the same list the merch page renders, so what a buyer
+ * sees and what they are charged for can't drift apart. The Printful id
+ * travels in the session metadata to the order webhook.
+ */
 export async function POST(request: NextRequest) {
   let body: { productId?: string; size?: string; color?: string };
   try {
@@ -85,71 +29,31 @@ export async function POST(request: NextRequest) {
 
   const { productId, size, color } = body;
 
-  // ── Block inquiry-only products (e.g. ARK Tactical X1 drone) ───────────────
   if (productId && inquiryOnlyProductIds.has(productId)) {
     return NextResponse.json(
       {
-        error:
-          "This product is not available for direct purchase. Please contact us for inquiries.",
+        error: "This product is not available for direct purchase. Please contact us for inquiries.",
         inquiryOnly: true,
       },
       { status: 403 }
     );
   }
 
-  // ── Check direct (non-Printful) products first ─────────────────────────────
-  const directProduct = directProducts.find((p) => p.id === productId);
-  if (directProduct) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || "https://arkindustriestech.com";
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            unit_amount: directProduct.price,
-            product_data: {
-              name: directProduct.name,
-              description: directProduct.description,
-              images: [directProduct.image],
-            },
-          },
-          quantity: 1,
-        },
-      ],
-      shipping_address_collection: {
-        allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK"],
-      },
-      metadata: {
-        productId: directProduct.id,
-        printfulVariantId: "", // empty → webhook skips Printful fulfillment
-        size: "",
-        color: "",
-        isPrintful: "false",
-      },
-      success_url: `${origin}/merch/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/merch`,
-    });
-
-    return NextResponse.json({ url: session.url });
-  }
-
-  // ── Printful-fulfilled products ────────────────────────────────────────────
-  const product = printfulProducts.find((p) => p.id === productId);
+  const product = productId ? getProductById(productId) : undefined;
   if (!product) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
 
-  const variant =
-    "variants" in product && product.variants
-      ? product.variants.find((v) => v.size === size && v.color === color)
-      : null;
-  const price = variant ? variant.price : product.price;
-  const printfulVariantId = variant
-    ? variant.printfulVariantId
-    : (product as { printfulVariantId: number }).printfulVariantId;
+  const variant = product.variants ? getVariant(product, size ?? "", color ?? "") : null;
+  if (product.variants && !variant) {
+    return NextResponse.json({ error: "Please choose an available size." }, { status: 400 });
+  }
+
+  const price = variant?.price ?? product.price;
+  const ref = printfulRefOf(variant ?? product);
+  if (!price || !ref) {
+    return NextResponse.json({ error: "This product is not available right now." }, { status: 400 });
+  }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const origin = process.env.NEXT_PUBLIC_SITE_URL || "https://arkindustriestech.com";
@@ -171,13 +75,13 @@ export async function POST(request: NextRequest) {
         quantity: 1,
       },
     ],
-    shipping_address_collection: {
-      allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR", "NL", "SE", "NO", "DK"],
-    },
+    shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
     phone_number_collection: { enabled: true },
     metadata: {
       productId: product.id,
-      printfulVariantId: String(printfulVariantId),
+      // Exactly one of these is set; the webhook turns it into the Printful line item.
+      printfulVariantId: "syncVariantId" in ref ? String(ref.syncVariantId) : "",
+      printfulExternalVariantId: "externalVariantId" in ref ? ref.externalVariantId : "",
       size: size || "",
       color: color || "",
       isPrintful: "true",

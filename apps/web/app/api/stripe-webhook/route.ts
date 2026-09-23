@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getShippingDetails } from "../../../lib/checkout-shipping";
-import { printfulHeaders, printfulOrderItem } from "../../../lib/printful";
+import {
+  printfulExternalId,
+  printfulHeaders,
+  printfulOrderItem,
+  type PrintfulRef,
+} from "../../../lib/printful";
 
 async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   // Direct (non-Printful) products are fulfilled by hand.
@@ -9,21 +14,28 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   if (!isPrintful) return;
 
   const shipping = getShippingDetails(session);
-  const variantId = Number(session.metadata?.printfulVariantId);
+  // Sessions carry either a sync id or an external id (see app/api/checkout).
+  const externalVariantId = session.metadata?.printfulExternalVariantId || "";
+  const syncVariantId = Number(session.metadata?.printfulVariantId) || 0;
+  const ref: PrintfulRef | null = externalVariantId
+    ? { externalVariantId }
+    : syncVariantId
+      ? { syncVariantId }
+      : null;
 
   // A paid Printful order without an address or variant is a failure, not a
   // skip. Throwing makes the webhook return 500, so Stripe retries and flags
   // the failed delivery in the dashboard instead of the order vanishing.
-  if (!shipping?.address || !variantId) {
+  if (!shipping?.address || !ref) {
     throw new Error(
-      `Checkout ${session.id} has no ${!variantId ? "Printful variant id" : "shipping address"}`
+      `Checkout ${session.id} has no ${!ref ? "Printful variant id" : "shipping address"}`
     );
   }
 
   const body = {
     // Idempotency: if Stripe retries the webhook, Printful will return the
     // existing order rather than creating a duplicate.
-    external_id: session.id,
+    external_id: printfulExternalId(session),
     recipient: {
       name: shipping.name,
       address1: shipping.address.line1,
@@ -35,7 +47,7 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
       email: session.customer_details?.email || "",
       phone: session.customer_details?.phone || "",
     },
-    items: [printfulOrderItem(variantId)],
+    items: [printfulOrderItem(ref)],
     retail_costs: {
       subtotal: ((session.amount_total ?? 0) / 100).toFixed(2),
       currency: "USD",

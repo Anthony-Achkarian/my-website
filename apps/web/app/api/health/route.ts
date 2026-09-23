@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
-import { printfulHeaders, printfulOrderItem } from "../../../lib/printful";
+import { printfulHeaders, printfulOrderItem, printfulRefOf, type PrintfulRef } from "../../../lib/printful";
 import { products } from "../../../lib/products";
 
 export const dynamic = "force-dynamic";
 
-// Every store variant the merch page can sell.
-const SELLABLE_SYNC_VARIANT_IDS = products.flatMap((p) =>
-  p.variants
-    ? p.variants.map((v) => v.printfulVariantId)
-    : p.printfulVariantId
-      ? [p.printfulVariantId]
-      : []
+// Every store variant the merch page can sell, as Printful references.
+const SELLABLE: PrintfulRef[] = products.flatMap((p) =>
+  (p.variants ?? [p]).map(printfulRefOf).filter((r): r is PrintfulRef => r !== null)
 );
 
 /**
@@ -36,12 +32,12 @@ export async function GET() {
           country_code: "US",
           zip: "91311",
         },
-        items: SELLABLE_SYNC_VARIANT_IDS.map(printfulOrderItem),
+        items: SELLABLE.map(printfulOrderItem),
       }),
       cache: "no-store",
     });
     if (res.ok) {
-      printful = `ok (${SELLABLE_SYNC_VARIANT_IDS.length} variants)`;
+      printful = `ok (${SELLABLE.length} variants)`;
     } else {
       const body = await res.json().catch(() => ({}));
       printful = `error ${res.status}: ${String(body?.error?.message ?? body?.result ?? "")}`.slice(0, 200);

@@ -1,7 +1,10 @@
 export type ProductVariant = {
   size: string;
   color: string;
-  printfulVariantId: number;
+  /** Printful sync variant id (API-created products). */
+  printfulVariantId?: number;
+  /** Printful external variant id (dashboard-created products), without the "#". */
+  printfulExternalVariantId?: string;
   price: number; // in cents
 };
 
@@ -16,6 +19,7 @@ export type Product = {
   variants?: ProductVariant[];
   // For simple products with no size/color options
   printfulVariantId?: number;
+  printfulExternalVariantId?: string;
   price?: number;
   specs?: { label: string; value: string }[];
   badge?: string;
@@ -61,16 +65,18 @@ export const products: Product[] = [
   {
     id: "ark-tshirt",
     name: "T-Shirt",
-    description: "Unisex organic cotton tee with the ARK Industries logo. Lightweight and sustainably made.",
-    image: "https://files.cdn.printful.com/files/8ab/8ab930ae7fe5fdd6c76480e18f570023_preview.png",
+    description: "Unisex organic cotton tee with the ARK Industries logo on the chest. Lightweight, regular fit, sustainably made.",
+    // Stanley/Stella Crafter (SATU007): its French Navy matches the sweatshirt and hoodie.
+    // Printful product 474809010, created in the dashboard, so sizes use external ids.
+    image: "https://files.cdn.printful.com/files/aed/aeddf7bbf3222680a46bee6b0c3d48ad_preview.png",
     category: "Apparel",
     sizes: ["S", "M", "L", "XL", "2XL"],
     variants: [
-      { size: "S",   color: "French Navy", printfulVariantId: 5246862152, price: 3500 },
-      { size: "M",   color: "French Navy", printfulVariantId: 5246862153, price: 3500 },
-      { size: "L",   color: "French Navy", printfulVariantId: 5246862154, price: 3500 },
-      { size: "XL",  color: "French Navy", printfulVariantId: 5246862155, price: 3500 },
-      { size: "2XL", color: "French Navy", printfulVariantId: 5246862156, price: 3800 },
+      { size: "S",   color: "French Navy", printfulExternalVariantId: "6ab3fe4da650b1", price: 3500 },
+      { size: "M",   color: "French Navy", printfulExternalVariantId: "6ab3fe4da650d8", price: 3500 },
+      { size: "L",   color: "French Navy", printfulExternalVariantId: "6ab3fe4da650e5", price: 3500 },
+      { size: "XL",  color: "French Navy", printfulExternalVariantId: "6ab3fe4da650f2", price: 3500 },
+      { size: "2XL", color: "French Navy", printfulExternalVariantId: "6ab3fe4da65107", price: 3800 },
     ],
   },
   {
