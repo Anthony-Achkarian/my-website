@@ -5,13 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-type NavItem = { href: string; label: string; status?: "live" | "soon" };
+type Status = "live" | "soon" | "research";
+type NavItem = { href: string; label: string; status?: Status };
+
+const STATUS_TEXT: Record<Status, string> = { live: "Live", soon: "Soon", research: "Research" };
 
 const PRODUCTS: NavItem[] = [
   { href: "/software", label: "ARK Studio", status: "soon" },
   { href: "/robotics", label: "Robotics", status: "live" },
-  { href: "/quantum", label: "Quantum Computers", status: "soon" },
-  { href: "/data-centers", label: "Data Centers", status: "soon" },
+  { href: "/photonics", label: "Photonic Chips", status: "research" },
   { href: "/health", label: "Health", status: "soon" },
   { href: "/housing", label: "Housing", status: "soon" },
 ];
@@ -24,7 +26,7 @@ const SECONDARY: NavItem[] = [
 
 function StatusBadge({ status }: { status: NavItem["status"] }) {
   if (!status) return null;
-  return <span className={`nav-badge nav-badge--${status}`}>{status === "live" ? "Live" : "Soon"}</span>;
+  return <span className={`nav-badge nav-badge--${status}`}>{STATUS_TEXT[status]}</span>;
 }
 
 function Caret() {

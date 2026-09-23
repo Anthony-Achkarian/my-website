@@ -4,8 +4,7 @@ import Link from "next/link";
 const PRODUCTS = [
   { href: "/software", label: "ARK Studio" },
   { href: "/robotics", label: "Robotics" },
-  { href: "/quantum", label: "Quantum" },
-  { href: "/data-centers", label: "Data Centers" },
+  { href: "/photonics", label: "Photonic Chips" },
   { href: "/health", label: "Health" },
   { href: "/housing", label: "Housing" },
 ];

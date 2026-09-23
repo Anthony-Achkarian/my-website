@@ -104,7 +104,7 @@ export default function CareersPage() {
           <div className="hero-badge">We&apos;re Hiring</div>
           <h1>Join Ark<br /><span className="gradient-text">Industries.</span></h1>
           <p>
-            We&apos;re building the most ambitious technology company of the next decade — across AI, robotics, quantum computing, health, and housing. We want people who don&apos;t just want a job, but want to shape what comes next.
+            We&apos;re building the most ambitious technology company of the next decade — across AI, robotics, photonic computing, health, and housing. We want people who don&apos;t just want a job, but want to shape what comes next.
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <a href="#openings" className="btn-primary">

@@ -314,6 +314,11 @@ section { padding: var(--section-y) var(--gutter); }
   color: var(--gray-400);
   border: 1px solid rgba(148, 163, 184, 0.2);
 }
+.nav-badge--research {
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+}
 
 /* ── Mobile toggle: a real 44px target ── */
 .site-nav-toggle {

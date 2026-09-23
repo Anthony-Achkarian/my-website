@@ -25,7 +25,7 @@ const AMOUNT_RANGES = [
 const highlights = [
   {
     title: "A Multi-Vertical Portfolio",
-    desc: "One company, six frontiers — AI software, robotics, quantum computing, data centers, health, and housing. Capital deployed at ARK is exposure to a diversified base of deep-tech bets, not a single product.",
+    desc: "One company, five frontiers — AI software, robotics, photonic chips, health, and housing. Capital deployed at ARK is exposure to a diversified base of deep-tech bets, not a single product.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/>
@@ -113,7 +113,7 @@ export default function InvestPage() {
           <div className="hero-badge">Now Raising</div>
           <h1>Invest in<br /><span className="gradient-text">the Future.</span></h1>
           <p>
-            Ark Industries is building across the frontiers that will define the next century — AI, robotics, quantum, data infrastructure, health, and housing. We&apos;re opening the door to a select group of partners who want to build it with us.
+            Ark Industries is building across the frontiers that will define the next century — AI, robotics, photonics, health, and housing. We&apos;re opening the door to a select group of partners who want to build it with us.
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <a href="#inquire" className="btn-primary">
@@ -172,7 +172,7 @@ export default function InvestPage() {
                 Tell us a bit about yourself and we&apos;ll be in touch with our investor materials and next steps. Every inquiry is reviewed personally by the founding team.
               </p>
               <div className="careers-perks">
-                {["Direct access to the founding team", "Transparent reporting & updates", "Exposure across six deep-tech verticals", "Patient, long-horizon capital"].map((p) => (
+                {["Direct access to the founding team", "Transparent reporting & updates", "Exposure across five deep-tech verticals", "Patient, long-horizon capital"].map((p) => (
                   <div key={p} className="careers-perk">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                     <span>{p}</span>
