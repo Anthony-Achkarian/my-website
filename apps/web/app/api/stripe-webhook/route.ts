@@ -33,8 +33,7 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
   }
 
   const body = {
-    // Idempotency: if Stripe retries the webhook, Printful will return the
-    // existing order rather than creating a duplicate.
+    // Unique per store, so a retried webhook can never create a second order.
     external_id: printfulExternalId(session),
     recipient: {
       name: shipping.name,
@@ -64,7 +63,22 @@ async function createPrintfulOrder(session: Stripe.Checkout.Session) {
 
   if (!res.ok) {
     const err = await res.text();
-    console.error("Printful order failed:", err);
+    // Stripe retries a webhook when it didn't get our answer, even if the
+    // order went through, and Printful rejects the repeated external_id.
+    // Look the order up: one already submitted for fulfillment means done.
+    const existing = await fetch(`https://api.printful.com/orders/@${body.external_id}`, {
+      headers: printfulHeaders(),
+    });
+    if (existing.ok) {
+      const status: string = (await existing.json()).result?.status ?? "";
+      if (status && status !== "draft" && status !== "failed") {
+        console.log(`Printful order ${body.external_id} already exists (${status})`);
+        return;
+      }
+      console.error(`Printful order ${body.external_id} exists but is ${status || "unknown"}:`, err);
+    } else {
+      console.error("Printful order failed:", err);
+    }
     throw new Error("Printful order creation failed");
   }
 
